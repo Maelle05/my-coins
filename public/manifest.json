@@ -1,0 +1,9 @@
+{
+    "short_name": "My Coins",
+    "name": "My Coins",
+    "start_url": "/?source=pwa",
+    "background_color": "#3367D6",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#3367D6"
+}
