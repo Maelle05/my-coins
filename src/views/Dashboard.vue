@@ -1,10 +1,18 @@
 <template>
   <div class="dashboard">
-    <h1>Dashboard page</h1>
-    <p>This page is only visible to users that are currently logged in</p>
+    <h1>Dashboard</h1>
+    <p>Bienvenue sur ton dashboard {{user.data.email}}</p>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    // map `this.user` to `this.$store.getters.user`
+    ...mapGetters({
+      user: "user",
+    }),
+  },
+};
 </script>
