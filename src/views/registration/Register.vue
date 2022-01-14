@@ -2,7 +2,8 @@
   <div class="register">
     <h1>Register</h1>
     <form @submit.prevent="register">
-      <input type="email" placeholder="Email address..." v-model="email" />
+      <input type="text" placeholder="Prénom" v-model="name" />
+      <input type="email" placeholder="Mail" v-model="email" />
       <input type="password" placeholder="password..." v-model="password" />
       <button type="submit">Register</button>
     </form>
@@ -26,9 +27,15 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          alert("Successfully registered! Please login.");
-          this.$router.push("/");
+        .then((data) => {
+          data.user
+            .updateProfile({
+              displayName: this.name,
+            })
+            .then(() => {
+              alert("Successfully registered! Please login.");
+              this.$router.push("/");
+            });
         })
         .catch((error) => {
           alert(error.message);

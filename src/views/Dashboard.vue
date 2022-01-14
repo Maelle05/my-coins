@@ -1,7 +1,10 @@
 <template>
   <div class="dashboard">
     <h1>Dashboard</h1>
-    <p>Bienvenue sur ton dashboard {{user.data.email}}</p>
+    <p>
+      Bienvenue sur ton dashboard
+      <strong>{{user.data.displayName}}</strong>
+    </p>
   </div>
 </template>
 
