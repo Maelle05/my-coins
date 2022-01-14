@@ -1,11 +1,10 @@
 <template>
-  <div class="home">
-    <h1>Home</h1>
-    <form @submit.prevent="login">
-      <h2>Login</h2>
+  <div class="register">
+    <form @submit.prevent="register">
+      <h2>Register</h2>
       <input type="email" placeholder="Email address..." v-model="email" />
       <input type="password" placeholder="password..." v-model="password" />
-      <button type="submit">Login</button>
+      <button type="submit">Register</button>
     </form>
   </div>
 </template>
@@ -16,14 +15,20 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 
 export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
   methods: {
-    login() {
+    register() {
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
+        .createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          alert("Successfully logged in");
-          this.$router.push("/dashboard");
+          alert("Successfully registered! Please login.");
+          this.$router.push("/");
         })
         .catch((error) => {
           alert(error.message);
