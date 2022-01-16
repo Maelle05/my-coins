@@ -1,11 +1,12 @@
 <template>
   <div class="register">
-    <h1>Register</h1>
+    <h1>Inscription</h1>
     <form @submit.prevent="register">
       <input type="text" placeholder="Prénom" v-model="name" />
+      <input type="date" v-model="dateBirth" />
       <input type="email" placeholder="Mail" v-model="email" />
-      <input type="password" placeholder="password..." v-model="password" />
-      <button type="submit">Register</button>
+      <input type="password" placeholder="Mot de passe" v-model="password" />
+      <button type="submit">Ok</button>
     </form>
   </div>
 </template>

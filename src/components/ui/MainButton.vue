@@ -29,12 +29,12 @@ a {
   font-weight: 500;
 }
 .MainButton {
-  border: solid 2px #f23279;
-  color: #f23279;
+  border: solid 2px var(--color-pink);
+  color: var(--color-pink);
 }
 .MainButton.bgPink {
-  color: #fcfcfc;
-  background-color: #f23279;
+  color: var(--color-white);
+  background-color: var(--color-pink);
 }
 a > div {
   width: 100%;

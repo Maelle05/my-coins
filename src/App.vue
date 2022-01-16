@@ -31,8 +31,18 @@ export default {
   padding: 0;
 }
 
+:root {
+  --color-bg: #fafafa;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray: #dddddd;
+  --color-pink: #f23279;
+  --color-blue: #33c9ff;
+  --color-green: #41e94b;
+}
+
 #nav {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100vw;
@@ -43,8 +53,12 @@ export default {
   align-items: center;
 }
 
+body {
+  background-color: var(--color-bg);
+}
+
 #AppContainer {
-  margin: 0 20px;
+  padding: 0 20px;
 }
 
 h1 {
@@ -53,11 +67,21 @@ h1 {
   margin: 20px 0 0 0;
 }
 h1 > span {
-  color: #f23279;
+  color: var(--color-pink);
+  font-weight: 700;
+}
+h2,
+h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
 }
 p {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   margin: 10px 0 0 0;
+}
+span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
 }
 </style>
