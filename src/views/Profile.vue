@@ -1,7 +1,10 @@
 <template>
   <div class="profile">
     <h1>Mon Profil</h1>
-    <p>Prénom : {{user.data.displayName}}</p>
+    <p>Prénom : {{user.data.name}}</p>
+    <p>Date de naissance : {{user.data.birth}}</p>
+    <p>Téléphone : {{user.data.phone}}</p>
+    <p>Mail : {{user.data.email}}</p>
     <button @click="logout">Logout</button>
   </div>
 </template>
@@ -36,3 +39,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+button {
+  margin: 20px 0 0 0;
+  border: none;
+  background-color: var(--color-bg);
+  text-decoration: underline;
+}
+</style>

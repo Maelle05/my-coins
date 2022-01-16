@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Login</h1>
+    <h1>Connexion</h1>
     <form @submit.prevent="login" ref="loginForm">
       <label for="email">Mail</label>
       <input type="email" placeholder="name@domain.com" id="email" />

@@ -28,14 +28,20 @@ export default {
       const email = this.$refs.registerForm["email"].value;
       const password = this.$refs.registerForm["password"].value;
       const name = this.$refs.registerForm["name"].value;
-      // const dateBirth = this.$refs.registerForm["dateBirth"].value;
+      const dateBirth = this.$refs.registerForm["dateBirth"].value;
+      const tel = this.$refs.registerForm["tel"].value;
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then((data) => {
-          data.user
-            .updateProfile({
+        .then((cred) => {
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(cred.user.uid)
+            .set({
               displayName: name,
+              dateOfBirth: dateBirth,
+              phoneNumber: tel,
             })
             .then(() => {
               alert("Successfully registered! Please login.");

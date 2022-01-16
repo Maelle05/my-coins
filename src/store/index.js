@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { getAuth } from "firebase/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 Vue.use(Vuex)
 
@@ -27,10 +31,22 @@ export default new Vuex.Store({
     fetchUser({ commit }, user) {
       commit("SET_LOGGED_IN", user !== null);
       if (user) {
-        commit("SET_USER", {
-          displayName: user.displayName,
-          email: user.email,
-        });
+        const auth = getAuth().currentUser;
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(auth.uid)
+          .get()
+          .then((doc) => {
+            const data = doc.data();
+            commit("SET_USER", {
+              id: auth.uid,
+              email: auth.email,
+              name: data.displayName,
+              birth: data.dateOfBirth,
+              phone: data.phoneNumber
+            });
+          });
       } else {
         commit("SET_USER", null);
       }
