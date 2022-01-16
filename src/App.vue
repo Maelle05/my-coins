@@ -36,6 +36,7 @@ export default {
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray: #dddddd;
+  --color-gray-text: #bfc0c4;
   --color-pink: #f23279;
   --color-blue: #33c9ff;
   --color-green: #41e94b;
@@ -83,5 +84,50 @@ p {
 span {
   font-family: "Montserrat", sans-serif;
   font-weight: 100;
+}
+
+form {
+  margin: 20px 0;
+}
+
+form label {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  display: block;
+  color: var(--color-gray-text);
+  font-size: 12px;
+  margin: 20px 0 0 0;
+}
+
+form input {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  display: block;
+  color: var(--color-gray);
+  font-size: 20px;
+  border: none;
+  background-color: var(--color-bg);
+  margin-top: 5px;
+  width: 100%;
+  padding: 0 0 5px 0;
+  border-bottom: 2px solid;
+}
+
+form input::placeholder {
+  color: var(--color-gray);
+  opacity: 1;
+}
+
+form button {
+  width: 40%;
+  height: 40px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: var(--color-white);
+  background-color: var(--color-pink);
+  border: none;
+  margin: 30px 0 0 0;
 }
 </style>

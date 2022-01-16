@@ -2,10 +2,10 @@
   <div class="home">
     <h1>Login</h1>
     <form @submit.prevent="login" ref="loginForm">
-      <!-- <input type="email" placeholder="Email address..." v-model="email" /> -->
-      <!-- <input type="password" placeholder="password..." v-model="password" /> -->
-      <input type="email" placeholder="Mail" id="email" />
-      <input type="password" placeholder="Mot de passe" id="password" />
+      <label for="email">Mail</label>
+      <input type="email" placeholder="name@domain.com" id="email" />
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" />
       <button type="submit">Login</button>
     </form>
   </div>

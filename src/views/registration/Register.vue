@@ -1,11 +1,17 @@
 <template>
   <div class="register">
     <h1>Inscription</h1>
-    <form @submit.prevent="register">
-      <input type="text" placeholder="Prénom" v-model="name" />
-      <input type="date" v-model="dateBirth" />
-      <input type="email" placeholder="Mail" v-model="email" />
-      <input type="password" placeholder="Mot de passe" v-model="password" />
+    <form @submit.prevent="register" ref="registerForm">
+      <label for="name">Prénom</label>
+      <input type="text" placeholder="Your name" id="name" />
+      <label for="dateBirth">Date de naissance</label>
+      <input type="date" id="dateBirth" />
+      <label for="tel">Téléphone</label>
+      <input type="tel" id="tel" />
+      <label for="email">Mail</label>
+      <input type="email" placeholder="name@domain.com" id="email" />
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" />
       <button type="submit">Ok</button>
     </form>
   </div>
@@ -17,21 +23,19 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 
 export default {
-  data() {
-    return {
-      email: "",
-      password: "",
-    };
-  },
   methods: {
     register() {
+      const email = this.$refs.registerForm["email"].value;
+      const password = this.$refs.registerForm["password"].value;
+      const name = this.$refs.registerForm["name"].value;
+      // const dateBirth = this.$refs.registerForm["dateBirth"].value;
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
+        .createUserWithEmailAndPassword(email, password)
         .then((data) => {
           data.user
             .updateProfile({
-              displayName: this.name,
+              displayName: name,
             })
             .then(() => {
               alert("Successfully registered! Please login.");
