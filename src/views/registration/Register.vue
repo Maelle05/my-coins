@@ -21,6 +21,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { setAlert } from "../../utils";
 
 export default {
   methods: {
@@ -44,12 +45,12 @@ export default {
               phoneNumber: tel,
             })
             .then(() => {
-              alert("Successfully registered! Please login.");
+              setAlert("Successfully registered! Please login.", false, true);
               this.$router.push("/");
             });
         })
         .catch((error) => {
-          alert(error.message);
+          setAlert(error.message, true, false);
         });
     },
   },

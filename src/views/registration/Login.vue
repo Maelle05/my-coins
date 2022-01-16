@@ -15,6 +15,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { setAlert } from "../../utils";
 
 export default {
   methods: {
@@ -25,11 +26,11 @@ export default {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          alert("Successfully logged in");
+          setAlert("Successfully logged in", false, true);
           this.$router.push("/dashboard");
         })
         .catch((error) => {
-          alert(error.message);
+          setAlert(error.message, true, false);
         });
     },
   },

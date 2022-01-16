@@ -14,6 +14,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { mapGetters } from "vuex";
+import { setAlert } from "../utils";
 
 export default {
   computed: {
@@ -28,11 +29,11 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          alert("Successfully logged out");
+          setAlert("Successfully logged out", false, true);
           this.$router.push("/");
         })
         .catch((error) => {
-          alert(error.message);
+          setAlert(error.message, true, false);
           this.$router.push("/");
         });
     },

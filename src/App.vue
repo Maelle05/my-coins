@@ -3,6 +3,7 @@
     <div id="AppContainer">
       <router-view />
     </div>
+    <alert-box />
     <div id="nav">
       <router-link to="/">Home</router-link>
       <router-link v-if="user.loggedIn" to="/dashboard">Dashboard</router-link>
@@ -13,13 +14,16 @@
 
 <script>
 import { mapGetters } from "vuex";
+import AlertBox from "./components/ui/AlertBox.vue";
 export default {
+  components: { AlertBox },
   computed: {
     // map `this.user` to `this.$store.getters.user`
     ...mapGetters({
       user: "user",
     }),
   },
+  methods: {},
 };
 </script>
 
@@ -40,6 +44,7 @@ export default {
   --color-pink: #f23279;
   --color-blue: #33c9ff;
   --color-green: #41e94b;
+  --color-red: #f05454;
 }
 
 #nav {

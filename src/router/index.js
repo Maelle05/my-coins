@@ -5,6 +5,7 @@ import Dashboard from '../views/Dashboard.vue'
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { setAlert } from "../utils";
 
 Vue.use(VueRouter)
 
@@ -56,7 +57,7 @@ router.beforeEach((to, from, next) => {
     if (firebase.auth().currentUser) {
       next();
     } else {
-      alert('You must be logged in to see this page');
+      setAlert('You must be logged in to see this page', true, false);
       next({
         path: '/',
       });
