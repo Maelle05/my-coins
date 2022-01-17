@@ -45,8 +45,7 @@ export default {
     firebase
       .firestore()
       .collection("News")
-      .get()
-      .then((snapshot) => {
+      .onSnapshot((snapshot) => {
         let html = "";
         snapshot.docs.forEach((doc) => {
           const news = doc.data();
@@ -91,6 +90,8 @@ h2.title {
 
 .NewsContainer {
   margin: 10px 0 0 0;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .NewsContainer .oneNewsContainer {
