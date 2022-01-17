@@ -108,14 +108,14 @@ form input {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   display: block;
-  color: var(--color-gray);
+  color: var(--color-black);
   font-size: 20px;
   border: none;
   background-color: var(--color-bg);
   margin-top: 5px;
   width: 100%;
   padding: 0 0 5px 0;
-  border-bottom: 2px solid;
+  border-bottom: 2px solid var(--color-gray);
 }
 
 form input::placeholder {

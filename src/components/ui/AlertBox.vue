@@ -37,11 +37,11 @@ export default {
 }
 
 .alertBox.red {
-  background: var(--color-red);
+  background: var(--color-red) !important;
 }
 
 .alertBox.green {
-  background: var(--color-green);
+  background: var(--color-green) !important;
 }
 
 .active {

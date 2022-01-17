@@ -25,6 +25,9 @@ export default new Vuex.Store({
     },
     SET_USER(state, data) {
       state.user.data = data;
+    },
+    SET_USER_EMAIL(state, email) {
+      state.user.data.email = email;
     }
   },
   actions: {
@@ -44,12 +47,28 @@ export default new Vuex.Store({
               email: auth.email,
               name: data.displayName,
               birth: data.dateOfBirth,
-              phone: data.phoneNumber
+              phone: data.phoneNumber,
+              language: data.language,
+              currency: data.currency
             });
           });
       } else {
         commit("SET_USER", null);
       }
+    },
+    updateUser({ commit }, userInfo) {
+      commit("SET_USER", {
+        id: userInfo.id,
+        email: userInfo.email,
+        name: userInfo.name,
+        birth: userInfo.birth,
+        phone: userInfo.phone,
+        language: userInfo.language,
+        currency: userInfo.currency
+      });
+    },
+    updateMail({ commit }, email) {
+      commit("SET_USER_EMAIL", email);
     }
   },
   modules: {

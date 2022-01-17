@@ -32,6 +32,14 @@ const routes = [
     },
   },
   {
+    path: '/profile/update',
+    name: 'ProfileUpdate',
+    component: () => import('../views/CRUD/ProfileUpdate.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
+  {
     path: '/register',
     name: 'Register',
     // route level code-splitting

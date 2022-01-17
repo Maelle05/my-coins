@@ -43,6 +43,8 @@ export default {
               displayName: name,
               dateOfBirth: dateBirth,
               phoneNumber: tel,
+              language: "fr",
+              currency: "€",
             })
             .then(() => {
               setAlert("Successfully registered! Please login.", false, true);

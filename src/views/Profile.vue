@@ -5,6 +5,10 @@
     <p>Date de naissance : {{user.data.birth}}</p>
     <p>Téléphone : {{user.data.phone}}</p>
     <p>Mail : {{user.data.email}}</p>
+    <p>Langue : {{user.data.language}}</p>
+    <p>Devise : {{user.data.currency}}</p>
+    <router-link to="/profile/update">Modifier le profil</router-link>
+    <br />
     <button @click="logout">Logout</button>
   </div>
 </template>
@@ -43,9 +47,15 @@ export default {
 
 <style scoped>
 button {
-  margin: 20px 0 0 0;
+  margin: 10px 0 0 0;
   border: none;
   background-color: var(--color-bg);
   text-decoration: underline;
+}
+a {
+  margin: 35px 0 0 0;
+  font-size: 14px;
+  color: var(--color-black);
+  display: block;
 }
 </style>

@@ -3,7 +3,7 @@
     <h1>Dashboard</h1>
     <p>
       Bienvenue sur ton dashboard
-      <strong>{{user.data.name}}</strong>
+      <strong v-if="user.data.name">{{user.data.name}}</strong>
     </p>
   </div>
 </template>
