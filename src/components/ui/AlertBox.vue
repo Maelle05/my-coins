@@ -1,15 +1,12 @@
 <template>
   <div class="alertBox" id="alertBox">
-    <p>{{text}}</p>
+    <p></p>
   </div>
 </template>
 
 <script>
 export default {
   name: "MainButton",
-  props: {
-    text: String,
-  },
 };
 </script>
 
