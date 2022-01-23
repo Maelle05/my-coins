@@ -18,13 +18,18 @@
     </div>
 
     <h2 class="title">Les News 👇</h2>
-    <div class="NewsContainer"></div>
+    <div class="NewsContainer">
+      <div v-for="element in news" :key="element.id">
+        <VNews :title="element.title" :date="element.date" :content="element.content" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import MainButton from "@/components/ui/MainButton.vue";
+import VNews from "@/components/VNews.vue";
 import { mapGetters } from "vuex";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -34,6 +39,7 @@ export default {
   name: "Home",
   components: {
     MainButton,
+    VNews,
   },
   computed: {
     // map `this.user` to `this.$store.getters.user`
@@ -41,27 +47,19 @@ export default {
       user: "user",
     }),
   },
+  data() {
+    return {
+      news: [],
+    };
+  },
   mounted() {
     firebase
       .firestore()
       .collection("News")
       .onSnapshot((snapshot) => {
-        let html = "";
-        snapshot.docs.forEach((doc) => {
-          const news = doc.data();
-          const containerNews = `
-          <div class='oneNewsContainer'>
-            <div class='newsHeader'>
-              <h3> ${news.title} </h3>
-              <span> ${news.date} </span>
-            </div>
-            <div class='newsContent'>
-              <p> ${news.content} </p>
-            </div>
-          </div>`;
-          html += containerNews;
+        snapshot.docs.forEach((newsEl) => {
+          this.news.push(newsEl.data());
         });
-        document.querySelector(".NewsContainer").innerHTML = html;
       });
   },
 };
@@ -92,22 +90,5 @@ h2.title {
   margin: 10px 0 0 0;
   display: flex;
   flex-direction: column-reverse;
-}
-
-.NewsContainer .oneNewsContainer {
-  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
-  background-color: var(--color-white);
-  margin: 10px 0 0 0;
-  padding: 15px 15px;
-  border-radius: 20px;
-  position: relative;
-}
-
-.NewsContainer .oneNewsContainer span {
-  color: var(--color-blue);
-  font-size: 14px;
-  position: absolute;
-  top: 18px;
-  right: 15px;
 }
 </style>
