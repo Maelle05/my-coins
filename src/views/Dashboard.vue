@@ -20,8 +20,13 @@
         </div>
       </div>
       <div class="currentAccountInfo">
-        <!-- <h2>{{accounts[currentAccount].name}}</h2>
-        <p>Solde : {{accounts[currentAccount].solde}}</p>-->
+        <div v-if="selected">
+          <h2>{{accounts[currentAccount].name}}</h2>
+          <p>Solde : {{accounts[currentAccount].solde}} {{user.data.currency}}</p>
+        </div>
+        <div v-else>
+          <p>👆 Sélectionne ton livret</p>
+        </div>
       </div>
     </div>
     <div class="PopUps">
@@ -64,6 +69,7 @@ export default {
     return {
       accounts: [],
       currentAccount: 0,
+      selected: false,
     };
   },
   computed: {
@@ -85,6 +91,9 @@ export default {
     setNavAccountsActive(index) {
       const navAccountItems = document.getElementsByClassName("navAccount");
       navAccountItems[index].classList.add("active");
+      if (this.selected === false) {
+        this.selected = true;
+      }
       if (this.currentAccount != index) {
         navAccountItems[this.currentAccount].classList.remove("active");
       }
@@ -124,6 +133,8 @@ export default {
           accounts: this.accounts,
         })
         .then(() => {
+          this.$refs.addAccountForm["name"].value = "";
+          this.$refs.addAccountForm["solde"].value = "";
           setAlert("Successfully add Account", false, true);
           this.endPopUp();
         })
