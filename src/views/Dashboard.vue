@@ -17,6 +17,7 @@
     </div>
     <div class="PopUps">
       <div class="NewAccount container active">
+        <span class="back" v-on:click="endPopUp">X</span>
         <h3>Ajout d'un nouveau livret</h3>
         <form @submit.prevent="addAccount" ref="addAccountForm">
           <label for="name">Nom du livret</label>
@@ -171,8 +172,17 @@ export default {
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
 
+.PopUps span.back {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 3px;
+  color: var(--color--gray-text);
+  opacity: 0.5;
+}
+
 .PopUps h3 {
   text-align: center;
+  margin-top: 10px;
 }
 
 .PopUps > .NewAccount {
