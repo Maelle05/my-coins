@@ -118,6 +118,10 @@ form input {
   border-bottom: 2px solid var(--color-gray);
 }
 
+form input[type="number"] {
+  width: 40%;
+}
+
 form input::placeholder {
   color: var(--color-gray);
   opacity: 1;
@@ -134,5 +138,16 @@ form button {
   background-color: var(--color-pink);
   border: none;
   margin: 30px 0 0 0;
+}
+
+.flex {
+  display: flex;
+}
+.flex.justifyCenter {
+  justify-content: center;
+}
+
+.flex.alignCenter {
+  align-items: center;
 }
 </style>
