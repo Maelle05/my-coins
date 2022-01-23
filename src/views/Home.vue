@@ -57,6 +57,7 @@ export default {
       .firestore()
       .collection("News")
       .onSnapshot((snapshot) => {
+        this.news = [];
         snapshot.docs.forEach((newsEl) => {
           this.news.push(newsEl.data());
         });
