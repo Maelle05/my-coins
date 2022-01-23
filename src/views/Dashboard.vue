@@ -7,16 +7,25 @@
         <strong v-if="user.data.name">{{user.data.name}}</strong>
       </p>
       <div class="navAccounts">
-        <div v-for="account of accounts" :key="account.id" class="navAccount">
+        <div
+          v-for="(account, index) of accounts"
+          :key="account.id"
+          class="navAccount"
+          @click="setNavAccountsActive(index)"
+        >
           <p>{{account.name}}</p>
         </div>
         <div @click="popUpAccount">
           <AddButton></AddButton>
         </div>
       </div>
+      <div class="currentAccountInfo">
+        <!-- <h2>{{accounts[currentAccount].name}}</h2>
+        <p>Solde : {{accounts[currentAccount].solde}}</p>-->
+      </div>
     </div>
     <div class="PopUps">
-      <div class="NewAccount container active">
+      <div class="NewAccount container">
         <span class="back" v-on:click="endPopUp">X</span>
         <h3>Ajout d'un nouveau livret</h3>
         <form @submit.prevent="addAccount" ref="addAccountForm">
@@ -54,6 +63,7 @@ export default {
   data() {
     return {
       accounts: [],
+      currentAccount: 0,
     };
   },
   computed: {
@@ -72,6 +82,14 @@ export default {
       });
   },
   methods: {
+    setNavAccountsActive(index) {
+      const navAccountItems = document.getElementsByClassName("navAccount");
+      navAccountItems[index].classList.add("active");
+      if (this.currentAccount != index) {
+        navAccountItems[this.currentAccount].classList.remove("active");
+      }
+      this.currentAccount = index;
+    },
     initPopUp() {
       const popUpsContainer = document.querySelector(".PopUps");
       popUpsContainer.style.opacity = 1;
@@ -80,6 +98,10 @@ export default {
       mainContainer.style.filter = "blur(4px)";
     },
     endPopUp() {
+      document
+        .querySelector(".PopUps > .NewAccount")
+        .classList.remove("active");
+      document.querySelector(".PopUps > .NewTrans").classList.remove("active");
       const popUpsContainer = document.querySelector(".PopUps");
       popUpsContainer.style.opacity = 0;
       popUpsContainer.style.pointerEvents = "none";
@@ -87,6 +109,7 @@ export default {
       mainContainer.style.filter = "blur(0)";
     },
     popUpAccount() {
+      document.querySelector(".PopUps > .NewAccount").classList.add("active");
       this.initPopUp();
     },
     addAccount() {
@@ -147,12 +170,24 @@ export default {
   text-align: center;
 }
 
+.navAccount.active {
+  background-color: var(--color-pink);
+}
+
+.navAccount.active p {
+  color: var(--color-white);
+}
+
+.currentAccountInfo h2 {
+  margin-top: 15px;
+}
+
 .PopUps {
   position: absolute;
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #33c9ff4b;
+  background-color: #dddddd4b;
   transform: translateX(-20px) translateY(-20px);
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
   filter: blur(0);

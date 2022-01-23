@@ -27,6 +27,7 @@ export default {
   justify-content: center;
   align-items: center;
   transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 .alertBox p {
