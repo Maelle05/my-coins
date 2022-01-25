@@ -213,6 +213,7 @@ export default {
           transactions: this.allTrans,
         })
         .then(() => {
+          const amount = this.$refs.addTransForm["amount"].value;
           this.$refs.addTransForm["name"].value = "";
           this.$refs.addTransForm["amount"].value = "";
           this.$refs.addTransForm["date"].value = "";
@@ -222,6 +223,7 @@ export default {
           setAlert("Successfully add Account", false, true);
           this.endPopUp();
           this.getAllTransAccount();
+          this.updateSoldeAccount(amount);
         })
         .catch((error) => {
           setAlert(error.message, true, false);
@@ -240,6 +242,22 @@ export default {
               this.trans.push(el);
             }
           });
+        });
+    },
+    updateSoldeAccount(amount) {
+      const amountFloat = parseFloat(amount);
+      const solde = parseFloat(this.accounts[this.currentAccount].solde);
+      const result = solde + amountFloat;
+      this.accounts[this.currentAccount].solde = result;
+      firebase
+        .firestore()
+        .collection("wallets")
+        .doc(this.user.data.id)
+        .set({
+          accounts: this.accounts,
+        })
+        .catch((error) => {
+          setAlert(error.message, true, false);
         });
     },
   },
