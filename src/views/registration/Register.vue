@@ -47,7 +47,7 @@ export default {
               currency: "€",
             })
             .then(() => {
-              setAlert("Successfully registered! Please login.", false, true);
+              setAlert("Successfully registered!", false, true);
               this.$router.push("/");
             });
         })

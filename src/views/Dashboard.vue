@@ -27,6 +27,21 @@
         <div v-else>
           <p>👆 Sélectionne ton livret</p>
         </div>
+        <div v-if="selected" class="transactions">
+          <p>Mes transactions</p>
+          <div class="transList container">
+            <div class="transItem" v-for="el in trans" :key="el.index">
+              <span class="name">{{el.name}}</span>
+              <span class="amount">{{el.amount}} {{user.data.currency}}</span>
+              <span class="date">{{el.date}}</span>
+            </div>
+          </div>
+          <div class="add">
+            <div @click="popUpTrens">
+              <AddButton></AddButton>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="PopUps">
@@ -45,8 +60,29 @@
         </form>
       </div>
       <div class="NewTrans container">
-        <p>Je suis le form pour les transactions</p>
-        <form action></form>
+        <span class="back" v-on:click="endPopUp">X</span>
+        <h3>Ajout d'une transactions</h3>
+        <form @submit.prevent="addTrans" ref="addTransForm">
+          <label for="name">Nom de la transaction</label>
+          <input type="text" placeholder="courses ..." id="name" required />
+          <label for="amount">Montant</label>
+          <div class="flex alignCenter">
+            <input type="number" id="amount" required />
+            <span>{{user.data.currency}}</span>
+          </div>
+          <label for="date">Nom de la transaction</label>
+          <input type="date" id="date" :value="currentDate()" required />
+          <label for="cat">Categorie</label>
+          <select name="cat" id="cat">
+            <option value="1">test 1</option>
+            <option value="2">test 2</option>
+          </select>
+          <label for="note">Note</label>
+          <input type="text" placeholder="..." id="note" />
+          <label for="status">Debité</label>
+          <input type="checkbox" id="status" />
+          <button type="submit">Ok</button>
+        </form>
       </div>
     </div>
   </div>
@@ -68,6 +104,8 @@ export default {
   data() {
     return {
       accounts: [],
+      trans: [],
+      allTrans: [],
       currentAccount: 0,
       selected: false,
     };
@@ -88,6 +126,10 @@ export default {
       });
   },
   methods: {
+    currentDate() {
+      const date = new Date().toLocaleDateString("en-CA");
+      return date;
+    },
     setNavAccountsActive(index) {
       const navAccountItems = document.getElementsByClassName("navAccount");
       navAccountItems[index].classList.add("active");
@@ -98,6 +140,7 @@ export default {
         navAccountItems[this.currentAccount].classList.remove("active");
       }
       this.currentAccount = index;
+      this.getAllTransAccount();
     },
     initPopUp() {
       const popUpsContainer = document.querySelector(".PopUps");
@@ -121,6 +164,10 @@ export default {
       document.querySelector(".PopUps > .NewAccount").classList.add("active");
       this.initPopUp();
     },
+    popUpTrens() {
+      document.querySelector(".PopUps > .NewTrans").classList.add("active");
+      this.initPopUp();
+    },
     addAccount() {
       const name = this.$refs.addAccountForm["name"].value;
       const solde = this.$refs.addAccountForm["solde"].value;
@@ -140,6 +187,59 @@ export default {
         })
         .catch((error) => {
           setAlert(error.message, true, false);
+        });
+    },
+    addTrans() {
+      const name = this.$refs.addTransForm["name"].value;
+      const amount = this.$refs.addTransForm["amount"].value;
+      const date = this.$refs.addTransForm["date"].value;
+      const cat = this.$refs.addTransForm["cat"].value;
+      const note = this.$refs.addTransForm["note"].value;
+      const status = this.$refs.addTransForm["status"].checked;
+      this.allTrans.push({
+        name: name,
+        amount: amount,
+        date: date,
+        cat: cat,
+        note: note,
+        status: status,
+        account: this.currentAccount,
+      });
+      firebase
+        .firestore()
+        .collection("transactions")
+        .doc(this.user.data.id)
+        .set({
+          transactions: this.allTrans,
+        })
+        .then(() => {
+          this.$refs.addTransForm["name"].value = "";
+          this.$refs.addTransForm["amount"].value = "";
+          this.$refs.addTransForm["date"].value = "";
+          this.$refs.addTransForm["cat"].value = "";
+          this.$refs.addTransForm["note"].value = "";
+          this.$refs.addTransForm["status"].checked = false;
+          setAlert("Successfully add Account", false, true);
+          this.endPopUp();
+          this.getAllTransAccount();
+        })
+        .catch((error) => {
+          setAlert(error.message, true, false);
+        });
+    },
+    getAllTransAccount() {
+      this.trans = [];
+      firebase
+        .firestore()
+        .collection("transactions")
+        .doc(this.user.data.id)
+        .onSnapshot((snapshot) => {
+          this.allTrans = snapshot.data().transactions;
+          this.allTrans.forEach((el) => {
+            if (el.account === this.currentAccount) {
+              this.trans.push(el);
+            }
+          });
         });
     },
   },
@@ -191,6 +291,64 @@ export default {
 
 .currentAccountInfo h2 {
   margin-top: 15px;
+}
+
+.transactions {
+  width: 100%;
+  margin-top: 20px;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  border-radius: 20px;
+  background-color: var(--color-white);
+  max-height: 250px;
+}
+
+.transactions .container {
+  overflow: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+  max-height: 150px;
+  margin: 0 20px 0 20px;
+}
+
+.transactions p {
+  margin: 20px;
+  padding: 20px 0 0 0;
+}
+
+.transactions div.add {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.transItem {
+  padding: 20px 0 20px 0;
+  position: relative;
+  border-bottom: solid 1px var(--color-gray);
+}
+
+.transItem:first-child {
+  padding: 20px 0 20px 0;
+  position: relative;
+  border-bottom: none;
+}
+
+.transItem .name {
+  font-weight: bold;
+}
+
+.transItem .date {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  font-size: 10px;
+  color: var(--color-blue);
+}
+
+.transItem .amount {
+  position: absolute;
+  right: 0;
 }
 
 .PopUps {

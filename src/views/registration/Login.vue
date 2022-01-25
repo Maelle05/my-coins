@@ -27,7 +27,7 @@ export default {
         .signInWithEmailAndPassword(email, password)
         .then(() => {
           setAlert("Successfully logged in", false, true);
-          this.$router.push("/dashboard");
+          this.$router.push("/");
         })
         .catch((error) => {
           setAlert(error.message, true, false);
