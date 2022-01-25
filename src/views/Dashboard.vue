@@ -122,7 +122,9 @@ export default {
       .collection("wallets")
       .doc(this.user.data.id)
       .onSnapshot((snapshot) => {
-        this.accounts = snapshot.data().accounts;
+        snapshot.data()
+          ? (this.accounts = snapshot.data().accounts)
+          : (this.accounts = []);
       });
   },
   methods: {
