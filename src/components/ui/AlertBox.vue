@@ -4,12 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "MainButton",
-};
-</script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .alertBox {
@@ -28,6 +22,9 @@ export default {
   align-items: center;
   transition: opacity 0.3s;
   pointer-events: none;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .alertBox p {
@@ -35,11 +32,11 @@ export default {
 }
 
 .alertBox.red {
-  background: var(--color-red) !important;
+  background: var(--color-orange) !important;
 }
 
 .alertBox.green {
-  background: var(--color-green) !important;
+  background: var(--color-blue) !important;
 }
 
 .active {

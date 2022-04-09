@@ -1,11 +1,11 @@
 {
-    "theme_color": "#f23279",
+    "theme_color": "#ffffff",
     "background_color": "#fafafa",
     "display": "standalone",
     "scope": "/",
     "start_url": "/?source=pwa",
     "name": "My Coins",
-    "short_name": "My Coins",
+    "short_name": "Coins",
     "icons": [
         {
             "src": "img/icons/icon-192x192.png",

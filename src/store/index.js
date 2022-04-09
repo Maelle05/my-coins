@@ -11,12 +11,26 @@ export default new Vuex.Store({
   state: {
     user: {
       loggedIn: false,
-      data: null
+      data: {
+        id: '',
+        email: '',
+        name: '',
+        birth: '',
+        phone: '',
+        language: '',
+        currency: ''
+      }
+    },
+    url: {
+      loginOrRegister: false,
     }
   },
   getters: {
     user(state) {
       return state.user
+    },
+    url(state) {
+      return state.url
     }
   },
   mutations: {
@@ -28,6 +42,9 @@ export default new Vuex.Store({
     },
     SET_USER_EMAIL(state, email) {
       state.user.data.email = email;
+    },
+    SET_URL_LOGIN_OR_REGISTER(state, value) {
+      state.url.loginOrRegister = value
     }
   },
   actions: {
@@ -69,6 +86,13 @@ export default new Vuex.Store({
     },
     updateMail({ commit }, email) {
       commit("SET_USER_EMAIL", email);
+    },
+    updateUrl({ commit }, url) {
+      if ( url === '/login' || url === '/register') {
+        commit("SET_URL_LOGIN_OR_REGISTER", true);
+      }else{
+        commit("SET_URL_LOGIN_OR_REGISTER", false);
+      }
     }
   },
   modules: {

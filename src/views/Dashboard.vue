@@ -2,7 +2,7 @@
   <div class="dashboard">
     <div class="MainDashboard">
       <h1>Dashboard</h1>
-      <p>
+      <!-- <p>
         Bienvenue sur ton dashboard
         <strong v-if="user.data.name">{{user.data.name}}</strong>
       </p>
@@ -83,15 +83,15 @@
           <input type="checkbox" id="status" />
           <button type="submit">Ok</button>
         </form>
-      </div>
-    </div>
+      </div> -->
+    </div> 
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import AddButton from "../components/ui/AddButton.vue";
-import { setAlert } from "../utils";
+// import AddButton from "../components/ui/AddButton.vue";
+// import { setAlert } from "../utils";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -99,7 +99,7 @@ import "firebase/compat/firestore";
 export default {
   name: "Dashboard",
   components: {
-    AddButton,
+    // AddButton,
   },
   data() {
     return {
@@ -127,142 +127,142 @@ export default {
           : (this.accounts = []);
       });
   },
-  methods: {
-    currentDate() {
-      const date = new Date().toLocaleDateString("en-CA");
-      return date;
-    },
-    setNavAccountsActive(index) {
-      const navAccountItems = document.getElementsByClassName("navAccount");
-      navAccountItems[index].classList.add("active");
-      if (this.selected === false) {
-        this.selected = true;
-      }
-      if (this.currentAccount != index) {
-        navAccountItems[this.currentAccount].classList.remove("active");
-      }
-      this.currentAccount = index;
-      this.getAllTransAccount();
-    },
-    initPopUp() {
-      const popUpsContainer = document.querySelector(".PopUps");
-      popUpsContainer.style.opacity = 1;
-      popUpsContainer.style.pointerEvents = "auto";
-      const mainContainer = document.querySelector(".MainDashboard");
-      mainContainer.style.filter = "blur(4px)";
-    },
-    endPopUp() {
-      document
-        .querySelector(".PopUps > .NewAccount")
-        .classList.remove("active");
-      document.querySelector(".PopUps > .NewTrans").classList.remove("active");
-      const popUpsContainer = document.querySelector(".PopUps");
-      popUpsContainer.style.opacity = 0;
-      popUpsContainer.style.pointerEvents = "none";
-      const mainContainer = document.querySelector(".MainDashboard");
-      mainContainer.style.filter = "blur(0)";
-    },
-    popUpAccount() {
-      document.querySelector(".PopUps > .NewAccount").classList.add("active");
-      this.initPopUp();
-    },
-    popUpTrens() {
-      document.querySelector(".PopUps > .NewTrans").classList.add("active");
-      this.initPopUp();
-    },
-    addAccount() {
-      const name = this.$refs.addAccountForm["name"].value;
-      const solde = this.$refs.addAccountForm["solde"].value;
-      this.accounts.push({ name: name, solde: solde });
-      firebase
-        .firestore()
-        .collection("wallets")
-        .doc(this.user.data.id)
-        .set({
-          accounts: this.accounts,
-        })
-        .then(() => {
-          this.$refs.addAccountForm["name"].value = "";
-          this.$refs.addAccountForm["solde"].value = "";
-          setAlert("Successfully add Account", false, true);
-          this.endPopUp();
-        })
-        .catch((error) => {
-          setAlert(error.message, true, false);
-        });
-    },
-    addTrans() {
-      const name = this.$refs.addTransForm["name"].value;
-      const amount = this.$refs.addTransForm["amount"].value;
-      const date = this.$refs.addTransForm["date"].value;
-      const cat = this.$refs.addTransForm["cat"].value;
-      const note = this.$refs.addTransForm["note"].value;
-      const status = this.$refs.addTransForm["status"].checked;
-      this.allTrans.push({
-        name: name,
-        amount: amount,
-        date: date,
-        cat: cat,
-        note: note,
-        status: status,
-        account: this.currentAccount,
-      });
-      firebase
-        .firestore()
-        .collection("transactions")
-        .doc(this.user.data.id)
-        .set({
-          transactions: this.allTrans,
-        })
-        .then(() => {
-          const amount = this.$refs.addTransForm["amount"].value;
-          this.$refs.addTransForm["name"].value = "";
-          this.$refs.addTransForm["amount"].value = "";
-          this.$refs.addTransForm["date"].value = "";
-          this.$refs.addTransForm["cat"].value = "";
-          this.$refs.addTransForm["note"].value = "";
-          this.$refs.addTransForm["status"].checked = false;
-          setAlert("Successfully add Account", false, true);
-          this.endPopUp();
-          this.getAllTransAccount();
-          this.updateSoldeAccount(amount);
-        })
-        .catch((error) => {
-          setAlert(error.message, true, false);
-        });
-    },
-    getAllTransAccount() {
-      this.trans = [];
-      firebase
-        .firestore()
-        .collection("transactions")
-        .doc(this.user.data.id)
-        .onSnapshot((snapshot) => {
-          this.allTrans = snapshot.data().transactions;
-          this.allTrans.forEach((el) => {
-            if (el.account === this.currentAccount) {
-              this.trans.push(el);
-            }
-          });
-        });
-    },
-    updateSoldeAccount(amount) {
-      const amountFloat = parseFloat(amount);
-      const solde = parseFloat(this.accounts[this.currentAccount].solde);
-      const result = solde + amountFloat;
-      this.accounts[this.currentAccount].solde = result;
-      firebase
-        .firestore()
-        .collection("wallets")
-        .doc(this.user.data.id)
-        .set({
-          accounts: this.accounts,
-        })
-        .catch((error) => {
-          setAlert(error.message, true, false);
-        });
-    },
-  },
+  // methods: {
+  //   currentDate() {
+  //     const date = new Date().toLocaleDateString("en-CA");
+  //     return date;
+  //   },
+  //   setNavAccountsActive(index) {
+  //     const navAccountItems = document.getElementsByClassName("navAccount");
+  //     navAccountItems[index].classList.add("active");
+  //     if (this.selected === false) {
+  //       this.selected = true;
+  //     }
+  //     if (this.currentAccount != index) {
+  //       navAccountItems[this.currentAccount].classList.remove("active");
+  //     }
+  //     this.currentAccount = index;
+  //     this.getAllTransAccount();
+  //   },
+  //   initPopUp() {
+  //     const popUpsContainer = document.querySelector(".PopUps");
+  //     popUpsContainer.style.opacity = 1;
+  //     popUpsContainer.style.pointerEvents = "auto";
+  //     const mainContainer = document.querySelector(".MainDashboard");
+  //     mainContainer.style.filter = "blur(4px)";
+  //   },
+  //   endPopUp() {
+  //     document
+  //       .querySelector(".PopUps > .NewAccount")
+  //       .classList.remove("active");
+  //     document.querySelector(".PopUps > .NewTrans").classList.remove("active");
+  //     const popUpsContainer = document.querySelector(".PopUps");
+  //     popUpsContainer.style.opacity = 0;
+  //     popUpsContainer.style.pointerEvents = "none";
+  //     const mainContainer = document.querySelector(".MainDashboard");
+  //     mainContainer.style.filter = "blur(0)";
+  //   },
+  //   popUpAccount() {
+  //     document.querySelector(".PopUps > .NewAccount").classList.add("active");
+  //     this.initPopUp();
+  //   },
+  //   popUpTrens() {
+  //     document.querySelector(".PopUps > .NewTrans").classList.add("active");
+  //     this.initPopUp();
+  //   },
+  //   addAccount() {
+  //     const name = this.$refs.addAccountForm["name"].value;
+  //     const solde = this.$refs.addAccountForm["solde"].value;
+  //     this.accounts.push({ name: name, solde: solde });
+  //     firebase
+  //       .firestore()
+  //       .collection("wallets")
+  //       .doc(this.user.data.id)
+  //       .set({
+  //         accounts: this.accounts,
+  //       })
+  //       .then(() => {
+  //         this.$refs.addAccountForm["name"].value = "";
+  //         this.$refs.addAccountForm["solde"].value = "";
+  //         setAlert("Successfully add Account", false, true);
+  //         this.endPopUp();
+  //       })
+  //       .catch((error) => {
+  //         setAlert(error.message, true, false);
+  //       });
+  //   },
+  //   addTrans() {
+  //     const name = this.$refs.addTransForm["name"].value;
+  //     const amount = this.$refs.addTransForm["amount"].value;
+  //     const date = this.$refs.addTransForm["date"].value;
+  //     const cat = this.$refs.addTransForm["cat"].value;
+  //     const note = this.$refs.addTransForm["note"].value;
+  //     const status = this.$refs.addTransForm["status"].checked;
+  //     this.allTrans.push({
+  //       name: name,
+  //       amount: amount,
+  //       date: date,
+  //       cat: cat,
+  //       note: note,
+  //       status: status,
+  //       account: this.currentAccount,
+  //     });
+  //     firebase
+  //       .firestore()
+  //       .collection("transactions")
+  //       .doc(this.user.data.id)
+  //       .set({
+  //         transactions: this.allTrans,
+  //       })
+  //       .then(() => {
+  //         const amount = this.$refs.addTransForm["amount"].value;
+  //         this.$refs.addTransForm["name"].value = "";
+  //         this.$refs.addTransForm["amount"].value = "";
+  //         this.$refs.addTransForm["date"].value = "";
+  //         this.$refs.addTransForm["cat"].value = "";
+  //         this.$refs.addTransForm["note"].value = "";
+  //         this.$refs.addTransForm["status"].checked = false;
+  //         setAlert("Successfully add Account", false, true);
+  //         this.endPopUp();
+  //         this.getAllTransAccount();
+  //         this.updateSoldeAccount(amount);
+  //       })
+  //       .catch((error) => {
+  //         setAlert(error.message, true, false);
+  //       });
+  //   },
+  //   getAllTransAccount() {
+  //     this.trans = [];
+  //     firebase
+  //       .firestore()
+  //       .collection("transactions")
+  //       .doc(this.user.data.id)
+  //       .onSnapshot((snapshot) => {
+  //         this.allTrans = snapshot.data().transactions;
+  //         this.allTrans.forEach((el) => {
+  //           if (el.account === this.currentAccount) {
+  //             this.trans.push(el);
+  //           }
+  //         });
+  //       });
+  //   },
+  //   updateSoldeAccount(amount) {
+  //     const amountFloat = parseFloat(amount);
+  //     const solde = parseFloat(this.accounts[this.currentAccount].solde);
+  //     const result = solde + amountFloat;
+  //     this.accounts[this.currentAccount].solde = result;
+  //     firebase
+  //       .firestore()
+  //       .collection("wallets")
+  //       .doc(this.user.data.id)
+  //       .set({
+  //         accounts: this.accounts,
+  //       })
+  //       .catch((error) => {
+  //         setAlert(error.message, true, false);
+  //       });
+  //   },
+  // },
 };
 </script>
 

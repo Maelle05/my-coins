@@ -1,18 +1,12 @@
 <template>
   <div class="register">
-    <h1>Inscription</h1>
     <form @submit.prevent="register" ref="registerForm">
-      <label for="name">Prénom</label>
-      <input type="text" placeholder="Your name" id="name" />
-      <label for="dateBirth">Date de naissance</label>
-      <input type="date" id="dateBirth" />
-      <label for="tel">Téléphone</label>
-      <input type="tel" id="tel" />
-      <label for="email">Mail</label>
-      <input type="email" placeholder="name@domain.com" id="email" />
-      <label for="password">Mot de passe</label>
-      <input type="password" id="password" />
-      <button type="submit">Ok</button>
+      <InputText label="Prénom" name="name"/>
+      <InputDate label="Date de naissance" />
+      <InputTel label="Téléphone" />
+      <InputMail label="Mail" />
+      <InputMDP label="Mot de passe"/>
+      <Submit label="Inscription"/>
     </form>
   </div>
 </template>
@@ -22,6 +16,12 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { setAlert } from "../../utils";
+import InputText from "../../components/form/InputText.vue"
+import InputMail from "../../components/form/InputMail.vue"
+import InputMDP from "../../components/form/InputMDP.vue"
+import InputDate from "../../components/form/InputDate.vue"
+import InputTel from "../../components/form/InputTel.vue"
+import Submit from "../../components/form/Submit.vue"
 
 export default {
   methods: {
@@ -29,7 +29,7 @@ export default {
       const email = this.$refs.registerForm["email"].value;
       const password = this.$refs.registerForm["password"].value;
       const name = this.$refs.registerForm["name"].value;
-      const dateBirth = this.$refs.registerForm["dateBirth"].value;
+      const dateBirth = this.$refs.registerForm["date"].value;
       const tel = this.$refs.registerForm["tel"].value;
       firebase
         .auth()
@@ -56,5 +56,21 @@ export default {
         });
     },
   },
+  components: {
+    InputText,
+    InputMail,
+    InputMDP,
+    InputDate,
+    InputTel,
+    Submit
+  }
 };
 </script>
+
+<style scoped>
+form{
+  margin: 30px auto 0 auto;
+  width: 70vw;
+}
+
+</style>

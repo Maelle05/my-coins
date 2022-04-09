@@ -5,7 +5,7 @@ import Dashboard from '../views/Dashboard.vue'
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import { setAlert } from "../utils";
+import store from "../store/index"
 
 Vue.use(VueRouter)
 
@@ -24,17 +24,9 @@ const routes = [
     },
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: () => import('../views/Profile.vue'),
-    meta: {
-      authRequired: true,
-    },
-  },
-  {
-    path: '/profile/update',
-    name: 'ProfileUpdate',
-    component: () => import('../views/CRUD/ProfileUpdate.vue'),
+    path: '/profil',
+    name: 'Profil',
+    component: () => import('../views/Profil.vue'),
     meta: {
       authRequired: true,
     },
@@ -65,7 +57,6 @@ router.beforeEach((to, from, next) => {
     if (firebase.auth().currentUser) {
       next();
     } else {
-      setAlert('You must be logged in to see this page', true, false);
       next({
         path: '/',
       });
@@ -73,6 +64,8 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+  const url = to.path
+  store.dispatch("updateUrl", url);
 });
 
 export default router
