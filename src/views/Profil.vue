@@ -39,7 +39,7 @@ export default {
         .then(() => {
           setAlert("Successfully logged out", false, true);
           store.dispatch("updateUser", {});
-          
+          store.dispatch("updateCategories", []);
         })
         .catch((error) => {
           setAlert(error.message, true, false);

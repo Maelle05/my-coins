@@ -1,5 +1,5 @@
 <template>
-  <button class="Submit" type="submit">{{label}}</button>
+  <button class="Submit" type="submit" :class="small ? 'small' : '' ">{{label}}</button>
 </template>
 
 <script>
@@ -7,6 +7,7 @@ export default {
   name: "Submit",
   props: {
     label: String,
+    small: Boolean
   }
 };
 </script>
@@ -25,5 +26,12 @@ export default {
   background-color: var(--color-black);
   color: var(--color-white);
   border-radius: 13px;
+}
+
+.Submit.small{
+  margin: 0;
+  width: 130px;
+  height: 43px;
+  border-radius: 8px;
 }
 </style>

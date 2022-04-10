@@ -65,6 +65,14 @@ const routes = [
       authRequired: true,
     },
   },
+  {
+    path: '/categories/create',
+    name: 'Create Categorie',
+    component: () => import('../views/create/CreateCat.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
   
 ]
 

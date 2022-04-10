@@ -16,7 +16,7 @@
 <script>
 // @ is an alias to /src
 import MainButton from "@/components/ui/MainButton.vue";
-import { mapGetters } from "vuex";
+import { mapGetters} from "vuex";
 
 export default {
   name: "Home",
@@ -27,7 +27,7 @@ export default {
     // map `this.user` to `this.$store.getters.user`
     ...mapGetters({
       user: "user",
-    }),
+    })
   },
 };
 </script>

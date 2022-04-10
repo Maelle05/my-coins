@@ -23,7 +23,8 @@ export default new Vuex.Store({
     },
     url: {
       loginOrRegister: false,
-    }
+    },
+    categories: []
   },
   getters: {
     user(state) {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     url(state) {
       return state.url
+    },
+    categories(state){
+      return state.categories
     }
   },
   mutations: {
@@ -45,6 +49,12 @@ export default new Vuex.Store({
     },
     SET_URL_LOGIN_OR_REGISTER(state, value) {
       state.url.loginOrRegister = value
+    },
+    ADD_NEW_CAT(state, value){
+      state.categories.push(value)
+    },
+    SET_CATEGORIES(state, data){
+      state.categories = data.categories
     }
   },
   actions: {
@@ -69,8 +79,18 @@ export default new Vuex.Store({
               currency: data.currency
             });
           });
+        firebase
+          .firestore()
+          .collection("categories")
+          .doc(auth.uid)
+          .get()
+          .then((doc) => {
+            const data = doc.data();
+            commit("SET_CATEGORIES", data);
+          });
       } else {
         commit("SET_USER", null);
+        commit("SET_CATEGORIES", []);
       }
     },
     updateUser({ commit }, userInfo) {
@@ -93,6 +113,12 @@ export default new Vuex.Store({
       }else{
         commit("SET_URL_LOGIN_OR_REGISTER", false);
       }
+    },
+    addNewCategories({ commit }, data) {
+      commit("ADD_NEW_CAT", data)
+    },
+    updateCategories({ commit }, data){
+      commit("SET_CATEGORIES", data);
     }
   },
   modules: {

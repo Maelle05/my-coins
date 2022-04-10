@@ -61,6 +61,7 @@ label.out {
 
 input {
   /* all: unset; */
+  pointer-events: none;
   border: none;
   background-color: var(--color-white);
   font-family: 'Roboto';

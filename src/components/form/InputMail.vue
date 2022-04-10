@@ -39,6 +39,7 @@ export default {
 }
 
 label {
+  pointer-events: none;
   display: block;
   position: absolute;
   font-family: 'Inter';
