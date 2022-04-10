@@ -9,7 +9,7 @@
     <div class="containerLink"><router-link to="/profil/update">Modifier le profil</router-link></div>
     <p class="first" >Mail : <span>{{user.data.email}}</span> </p>
     <p>Mot de pass : <span>******</span> </p>
-    <div class="containerLink"><router-link to="/profil/update">Modifier mail ou mdp </router-link></div>
+    <div class="containerLink"><router-link to="/profil/update/sign-in-info">Modifier mail ou mdp </router-link></div>
     <div class="containerLink"><span class="link" @click="logout">Logout</span></div>
     
   </div>
@@ -21,6 +21,7 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { mapGetters } from "vuex";
 import { setAlert } from "../utils";
+import store from "../store";
 
 export default {
   computed: {
@@ -31,12 +32,14 @@ export default {
   },
   methods: {
     logout() {
+      this.$router.push("/");
       firebase
         .auth()
         .signOut()
         .then(() => {
           setAlert("Successfully logged out", false, true);
-          this.$router.push("/");
+          store.dispatch("updateUser", {});
+          
         })
         .catch((error) => {
           setAlert(error.message, true, false);

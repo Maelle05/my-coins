@@ -49,6 +49,14 @@ const routes = [
       authRequired: true,
     },
   },
+  {
+    path: '/profil/update/sign-in-info',
+    name: 'Profil Update Mdp Mail',
+    component: () => import('../views/update/UpdateMailMdp.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
   
 ]
 
