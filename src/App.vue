@@ -23,11 +23,8 @@ export default {
 </script>
 
 <style>
- @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"); /* Inter */
-@font-face { font-family: "graphik-regular"; src: url("/fonts/graphik-regular.woff") format("woff") }
-@font-face { font-family: "graphik-bold"; src: url("/fonts/graphik-bold.woff") format("woff") }
-@font-face { font-family: "graphik-medium"; src: url("/fonts/graphik-medium.woff") format("woff") }
-@font-face { font-family: "graphik-semibold"; src: url("/fonts/graphik-semibold.woff") format("woff") }
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"); /* Inter */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap'); /* Roboto */
 
 * {
   margin: 0;

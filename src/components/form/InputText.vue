@@ -53,7 +53,8 @@ label.out {
 
 input {
   all: unset;
-  font-family: 'graphik-semibold';
+  font-family: 'Roboto';
+  font-weight: 700;
   border-bottom: 4px solid var(--color-orange);
   color: var(--color-black);
   padding: 12px 0 9px 0;

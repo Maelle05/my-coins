@@ -87,7 +87,8 @@ export default {
 }
 
 .menu p{
-  font-family: 'graphik-semibold';
+  font-family: 'Roboto';
+  font-weight: 700;
   font-size: 22px;
 }
 

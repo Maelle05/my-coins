@@ -27,7 +27,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'graphik-semibold';
+  font-family: 'Roboto';
+  font-weight: 700;
   color: var(--color-black);
 }
 
