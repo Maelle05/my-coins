@@ -57,6 +57,14 @@ const routes = [
       authRequired: true,
     },
   },
+  {
+    path: '/categories',
+    name: 'Categories',
+    component: () => import('../views/Categories.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
   
 ]
 
