@@ -1,7 +1,7 @@
 <template>
   <div class="InputTel">
     <label ref="label" for="tel" class="">{{label}}</label>
-    <input ref="input" type="tel" id="tel" />
+    <input ref="input" type="tel" id="tel" :value="value ? value : ''" />
   </div>
 </template>
 
@@ -10,8 +10,12 @@ export default {
   name: "InputTel",
   props: {
     label: String,
+    value: String
   },
   mounted(){
+    if (this.value) {
+      this.$refs.label.classList.add('out')
+    }
     this.$refs.input.addEventListener('focus', () => {
       this.$refs.label.classList.add('out')
     });

@@ -1,7 +1,7 @@
 <template>
   <div class="InputDate">
     <label ref="label" for="date" class="out">{{label}}</label>
-    <input ref="input" type="date" id="date" >
+    <input ref="input" type="date" id="date" :value="value ? value : getCurentDate()" >
   </div>
 </template>
 
@@ -10,15 +10,24 @@ export default {
   name: "InputDate",
   props: {
     label: String,
+    value: String
   },
   mounted(){
-    this.getCurentDate()
+    if (!this.value) {
+      this.getCurentDate()
+    }
   },
   methods:{
     getCurentDate(){
       const today = new Date();
       const date = today.getFullYear() + '-' + this.padTo2Digits(today.getMonth()+1) + '-' + this.padTo2Digits(today.getDate());
-      this.$refs.input.value = date
+      if (!this.value) {
+        if (this.$refs.input) {
+          this.$refs.input.value = date
+        }else{
+          return date
+        }
+      }
     },
     padTo2Digits(num) {
       return num.toString().padStart(2, '0');

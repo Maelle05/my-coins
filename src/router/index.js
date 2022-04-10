@@ -16,6 +16,16 @@ const routes = [
     component: Home
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/registration/Register.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/registration/Login.vue')
+  },
+  {
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
@@ -32,18 +42,14 @@ const routes = [
     },
   },
   {
-    path: '/register',
-    name: 'Register',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/registration/Register.vue')
+    path: '/profil/update',
+    name: 'Profil Update',
+    component: () => import('../views/update/UpdateProfil.vue'),
+    meta: {
+      authRequired: true,
+    },
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/registration/Login.vue')
-  }
+  
 ]
 
 const router = new VueRouter({

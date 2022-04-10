@@ -1,7 +1,7 @@
 <template>
   <div class="InputMail">
     <label ref="label" for="email" class="">{{label}}</label>
-    <input ref="input" type="email" id="email" />
+    <input ref="input" type="email" id="email" :value="value ? value : ''" />
   </div>
 </template>
 
@@ -10,8 +10,12 @@ export default {
   name: "InputMail",
   props: {
     label: String,
+    value: String
   },
   mounted(){
+    if (this.value) {
+      this.$refs.label.classList.add('out')
+    }
     this.$refs.input.addEventListener('focus', () => {
       this.$refs.label.classList.add('out')
     });

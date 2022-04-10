@@ -4,12 +4,14 @@
     <p class="first">Prénom : <span>{{user.data.name}}</span> </p>
     <p>Date de naissance : <span>{{user.data.birth}}</span> </p>
     <p>Téléphone : <span>{{user.data.phone}}</span></p>
-    <p>Mail : <span>{{user.data.email}}</span> </p>
     <p>Langue : <span>{{user.data.language}}</span> </p>
     <p>Devise : <span>{{user.data.currency}}</span> </p>
-    <!-- <router-link to="/profile/update">Modifier le profil</router-link> -->
-    <br />
-    <span class="link" @click="logout">Logout</span>
+    <div class="containerLink"><router-link to="/profil/update">Modifier le profil</router-link></div>
+    <p class="first" >Mail : <span>{{user.data.email}}</span> </p>
+    <p>Mot de pass : <span>******</span> </p>
+    <div class="containerLink"><router-link to="/profil/update">Modifier mail ou mdp </router-link></div>
+    <div class="containerLink"><span class="link" @click="logout">Logout</span></div>
+    
   </div>
 </template>
 
@@ -56,7 +58,7 @@ img{
 
 p{
   font-family: 'Inter';
-  font-weight: 500;
+  font-weight: 700;
   font-size: 19px;
   margin-top: 15px;
 }
@@ -71,10 +73,25 @@ p.first{
 
 span.link{
   display: block;
-  margin-top: 24px;
+  margin-top: 15px;
   font-family: 'Inter';
   font-weight: 500;
   font-size: 12px;
   text-decoration: underline;
+}
+
+div.containerLink{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+a{
+  margin-top: 30px;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--color-black);
 }
 </style>
