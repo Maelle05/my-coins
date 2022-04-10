@@ -54,11 +54,11 @@ export default {
 
 img{
   margin-top: 60px;
-  width: 70vw;
+  width: 80vw;
 }
 
 form{
   margin-top: 30px;
-  width: 70vw;
+  width: 80vw;
 }
 </style>
