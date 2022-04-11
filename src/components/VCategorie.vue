@@ -2,13 +2,13 @@
   <div class="VCategorie">
     <img :src="icons[getIconId(icon)]" alt="" srcset="" >
     <p>{{label}}</p>
-    <div class="cta" ref="cta" v-on:click='handleClickCta'>
+    <div class="cta" ref="cta" @click='handleClickCta'>
       <span class="dot"></span>
       <span class="dot"></span>
       <span class="dot"></span>
     </div>
     <div class="menuCat" ref="menuCat">
-      <div class="bg" ref="bg" v-on:click='handleClickCta' ></div>
+      <div class="bg" ref="bg" @click='handleClickCta' ></div>
       <div class="links">
         <router-link :to="'/categories/update/'+indexCat">Modifier</router-link>
         <span ref="suprBt">Supprimer</span>
