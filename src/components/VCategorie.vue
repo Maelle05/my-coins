@@ -38,6 +38,7 @@ export default {
   },
   methods: {
     handleClickCta(){
+      console.log('coucou');
       this.$refs.menuCat.classList.toggle('active')
     },
     getIconId(key){
@@ -133,7 +134,7 @@ span.dot {
   content: '';
   position: absolute;
   background-color: var(--color-black);
-  opacity: 0%;
+  opacity: 0;
   width: 100vw;
   height: 200vh;
   top: -100vh;
@@ -142,7 +143,7 @@ span.dot {
 }
 
 .menuCat.active{
-  opacity: 100%;
-  pointer-events: all;
+  opacity: 1 !important;
+  pointer-events: all !important;
 }
 </style>
