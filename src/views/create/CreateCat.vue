@@ -4,8 +4,8 @@
     <form @submit.prevent="createCat" ref="createCatForm">
       <input-text label="Label" name="label"/>
       <div class="inputToggle">
-        <span ref="revenu" class="active">Revenu</span>
-        <span ref="depense" >Dépense</span>
+        <span ref="depense" class="active" >Dépense</span>
+        <span ref="revenu" >Revenu</span>
       </div>
       <p>Icones</p>
       <div class="iconsContainer" >

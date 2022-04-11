@@ -41,4 +41,8 @@ export default {
   --color-blue: #B8DFE2;
   --color-dark-blue: #94BBBE;
 }
+
+body{
+  overflow-x: hidden;
+}
 </style>

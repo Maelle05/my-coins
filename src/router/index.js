@@ -73,6 +73,14 @@ const routes = [
       authRequired: true,
     },
   },
+  {
+    path: '/categories/update/:id',
+    name: 'Update Categorie',
+    component: () => import('../views/update/UpdateCat.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
   
 ]
 

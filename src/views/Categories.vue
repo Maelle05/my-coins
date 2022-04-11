@@ -59,14 +59,12 @@ export default {
       this.$refs.btRevenu.classList.remove('active')
       this.$refs.revenuContainer.classList.remove('active')
     })
-
     this.$refs.btRevenu.addEventListener('click', ()=> {
       this.$refs.btRevenu.classList.add('active')
       this.$refs.revenuContainer.classList.add('active')
       this.$refs.btDepense.classList.remove('active')
       this.$refs.depenceContainer.classList.remove('active')
     })
-
   },
 }
 </script>
