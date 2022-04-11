@@ -60,7 +60,8 @@ export default new Vuex.Store({
       state.categories[data.catID] = {
         label: data.label,
         revenu: data.revenu,
-        icon: data.icon
+        icon: data.icon,
+        id: data.id
       }
     }
   },

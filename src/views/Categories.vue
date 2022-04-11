@@ -8,12 +8,12 @@
     <div class="catsContainer depenceContainer active" ref="depenceContainer">
       
       <div v-for="(cat, index) in cat.depence" v-bind:key="'depence'+index">
-        <VCategorie :label="cat.categorie.label" :icon="cat.categorie.icon" :indexCat="cat.index"/>
+        <VCategorie :label="cat.categorie.label" :icon="cat.categorie.icon" :idCat="cat.categorie.id"/>
       </div>
     </div>
     <div class="catsContainer revenuContainer" ref="revenuContainer">
       <div v-for="(cat, index) in cat.revenu" v-bind:key="'revenu'+index" >
-        <VCategorie :label="cat.categorie.label" :icon="cat.categorie.icon" :indexCat="cat.index"/>
+        <VCategorie :label="cat.categorie.label" :icon="cat.categorie.icon" :idCat="cat.categorie.id"/>
       </div>
     </div>
     <div>

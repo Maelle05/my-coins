@@ -10,8 +10,14 @@
     <div class="menuCat" ref="menuCat">
       <div class="bg" ref="bg" @click='handleClickCta' ></div>
       <div class="links">
-        <router-link :to="'/categories/update/'+indexCat">Modifier</router-link>
-        <span ref="suprBt">Supprimer</span>
+        <router-link :to="'/categories/update/'+idCat">Modifier</router-link>
+        <span ref="suprBt" @click="handleClickSup()">Supprimer</span>
+      </div>
+      <div class="areYouSure" ref="areYouSure">
+        <h2>Etes-vous sûr de vouloir supprimer cette catégorie ?</h2>
+        <p>Toutes les transactions lier seront insérées dans la catégorie "Autre"</p>
+        <button @click="handleClickCta">Annuler</button>
+        <button @click="suprCat">Supprimer</button>
       </div>
     </div>
   </div>
@@ -23,7 +29,7 @@ export default {
   props: {
     label: String,
     icon: String,
-    indexCat: Number
+    idCat: Number
   },
   data(){
     return {
@@ -32,17 +38,22 @@ export default {
     }
   },
   mounted(){
-    this.$refs.suprBt.addEventListener('click', ()=>{
-      alert('Cette action n\'est pas encore disponible')
-    })
   },
   methods: {
     handleClickCta(){
-      console.log('coucou');
       this.$refs.menuCat.classList.toggle('active')
+      this.$refs.areYouSure.classList.remove('active')
+    },
+    handleClickSup(){
+      this.$refs.areYouSure.classList.add('active')
     },
     getIconId(key){
       return key.match(/\d+/g)[0]
+    },
+    suprCat(){
+      console.log('supr Cat');
+      this.handleClickCta()
+
     }
   }
 }
@@ -145,5 +156,52 @@ span.dot {
 .menuCat.active{
   opacity: 1 !important;
   pointer-events: all !important;
+}
+
+.areYouSure{
+  display: none;
+  position: absolute;
+  width: 75vw;
+  top: 0;
+  left: 0;
+  padding: 2.5vw;
+  background-color: var(--color-white);
+  transform: translateY(-40px);
+  border-radius: 13px;
+  filter: drop-shadow(3px 4px 20px rgba(0, 0, 0, 0.19));
+  text-align: center;
+}
+
+.areYouSure h2{
+  color: var(--color-black);
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.areYouSure p{
+  color: var(--color-black);
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.areYouSure button{
+  all: unset;
+  background-color: var(--color-black);
+  width: 100px;
+  height: 30px;
+  border-radius: 8px;
+  color: var(--color-white);
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 14px;
+  margin: 15px;
+}
+
+.areYouSure.active{
+  display: block;
 }
 </style>

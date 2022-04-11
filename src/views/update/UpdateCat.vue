@@ -2,14 +2,14 @@
   <div class="UpdateCat">
     <h1>Modifier Categorie </h1>
     <form @submit.prevent="updateCat" ref="createCatForm">
-      <input-text label="Label" name="label" :value="categories[catID].label"/>
+      <input-text label="Label" name="label" :value="categories[indexStore].label"/>
       <div class="inputToggle">
-        <span ref="depense" :class="categories[catID].revenu ? '' : 'active' " >Dépense</span>
-        <span ref="revenu" :class="categories[catID].revenu ? 'active' : '' " >Revenu</span>
+        <span ref="depense" :class="categories[indexStore].revenu ? '' : 'active' " >Dépense</span>
+        <span ref="revenu" :class="categories[indexStore].revenu ? 'active' : '' " >Revenu</span>
       </div>
       <p>Icones</p>
       <div class="iconsContainer" >
-        <img v-for="index in total_icons_cat" v-bind:key="index" :src="icons[index-1]" :class="index-1 == getIconId(categories[catID].icon) ? 'active' : ''" :alt="`icon ${index-1}`" srcset="" >
+        <img v-for="index in total_icons_cat" v-bind:key="index" :src="icons[index-1]" :class="index-1 == getIconId(categories[indexStore].icon) ? 'active' : ''" :alt="`icon ${index-1}`" srcset="" >
       </div>
       <div class="BtContainer">
         <Button label="Annuler" url="/categories" />
@@ -39,6 +39,7 @@ export default {
   data(){
     return {
       catID: this.$route.params.id,
+      indexStore: 0,
       total_icons_cat: require.context('../../assets/categories/', false, /\.(svg)$/).keys().length,
       icons: require.context('../../assets/categories/', false, /\.svg$/).keys().map(require.context('../../assets/categories/', false, /\.svg$/)),
       iconsElements: [],
@@ -51,7 +52,8 @@ export default {
     }),
   },
   mounted(){
-    if (this.categories.lenght < this.catID) {
+    this.indexStore = this.categories.findIndex((categorie) => String(categorie.id) === this.catID)
+    if (this.indexStore == '-1') {
       this.$router.push("/categories");
     }
 
@@ -79,7 +81,7 @@ export default {
       const label = this.$refs.createCatForm['label'].value
       const revenu = this.$refs.revenu.classList.contains('active')
       const icon = this.$refs.createCatForm.querySelector('img.active').alt
-      this.$store.dispatch("updateOneCategorie", { label: label, revenu: revenu, icon: icon, catID: this.catID});
+      this.$store.dispatch("updateOneCategorie", { label: label, id: parseFloat(this.catID) , revenu: revenu, icon: icon, catID: this.indexStore});
       firebase
         .firestore()
         .collection("categories")
