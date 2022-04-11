@@ -78,7 +78,7 @@ export default {
       }else{
         const revenu = this.$refs.revenu.classList.contains('active')
         const icon = this.$refs.createCatForm.querySelector('img.active').alt
-        this.$store.dispatch("addNewCategories", { label: label, revenu: revenu, icon: icon });
+        this.$store.dispatch("addNewCategories", { id: this.categories.length , label: label, revenu: revenu, icon: icon });
         firebase
           .firestore()
           .collection("categories")
