@@ -63,6 +63,9 @@ export default new Vuex.Store({
         icon: data.icon,
         id: data.id
       }
+    },
+    DELETE_CATEGORIE(state, index){
+      state.categories.splice(index, 1)
     }
   },
   actions: {
@@ -130,6 +133,10 @@ export default new Vuex.Store({
     },
     updateOneCategorie({ commit }, data){
       commit("UPDATE_CATEGORIE", data);
+    },
+    deleteOneCategorie({ commit }, id){
+      const index = this.getters.categories.findIndex((categorie) => categorie.id === id)
+      commit("DELETE_CATEGORIE", index);
     }
   },
   modules: {

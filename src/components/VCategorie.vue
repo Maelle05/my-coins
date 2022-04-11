@@ -24,6 +24,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { setAlert } from '../utils'
+import firebase from "firebase/compat/app";
 export default {
   name: "VCategorie",
   props: {
@@ -39,6 +42,12 @@ export default {
   },
   mounted(){
   },
+  computed: {
+    ...mapGetters({
+      user: "user",
+      categories: "categories"
+    }),
+  },
   methods: {
     handleClickCta(){
       this.$refs.menuCat.classList.toggle('active')
@@ -51,9 +60,22 @@ export default {
       return key.match(/\d+/g)[0]
     },
     suprCat(){
-      console.log('supr Cat');
+      this.$store.dispatch("deleteOneCategorie", this.idCat);
       this.handleClickCta()
-
+      firebase
+        .firestore()
+        .collection("categories")
+        .doc(this.user.data.id)
+        .set({
+          categories: this.categories
+        })
+        .then(() => {
+          setAlert("La categorie a bien été supprimer", false, true);
+          this.$router.push("/dashboard");
+        })
+        .catch((error) => {
+          setAlert(error.message, true, false);
+        });
     }
   }
 }
