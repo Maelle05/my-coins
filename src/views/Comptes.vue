@@ -1,10 +1,10 @@
 <template>
   <div class="Comptes">
     <h1>Mes Comptes</h1>
-    <div>
+    <div class="containerComptes">
       <div v-for="(compte, index) in comptes" v-bind:key="index">
         <p>{{compte.label}}</p>
-        <span>{{compte.solde}}</span>
+        <span>{{compte.solde}} {{user.data.currency}}</span>
       </div>
     </div>
     <div>
@@ -20,7 +20,8 @@ export default {
   name: 'Comptes',
   computed: {
     ...mapGetters({
-      comptes: "comptes"
+      comptes: "comptes",
+      user: "user"
     }),
   },
   mounted(){
@@ -30,6 +31,31 @@ export default {
 </script>
 
 <style scoped>
+.Comptes{
+  width: 80vw;
+  margin: auto;
+  margin-top: 40px ;
+}
+
+h1 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-black);
+}
+
+.containerComptes{
+  margin: 20px 0;
+}
+
+.containerComptes div{
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
 div.containerLink{
   display: flex;
   justify-content: center;
