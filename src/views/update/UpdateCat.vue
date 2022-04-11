@@ -104,7 +104,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .UpdateCat{
   width: 80vw;
   margin: auto;

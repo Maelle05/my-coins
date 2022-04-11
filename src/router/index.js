@@ -89,7 +89,14 @@ const routes = [
       authRequired: true,
     },
   },
-  
+  {
+    path: '/comptes/create',
+    name: 'Create Compte',
+    component: () => import('../views/create/CreateComptes.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
 ]
 
 const router = new VueRouter({

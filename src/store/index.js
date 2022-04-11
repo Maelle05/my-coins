@@ -24,7 +24,8 @@ export default new Vuex.Store({
     url: {
       loginOrRegister: false,
     },
-    categories: []
+    categories: [],
+    comptes: []
   },
   getters: {
     user(state) {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     },
     categories(state){
       return state.categories
+    },
+    comptes(state){
+      return state.comptes
     }
   },
   mutations: {
@@ -66,6 +70,12 @@ export default new Vuex.Store({
     },
     DELETE_CATEGORIE(state, index){
       state.categories.splice(index, 1)
+    },
+    SET_COMPTES(state, data){
+      state.comptes = data.comptes
+    },
+    ADD_NEW_COMPTE(state, data){
+      state.comptes.push(data)
     }
   },
   actions: {
@@ -98,6 +108,15 @@ export default new Vuex.Store({
           .then((doc) => {
             const data = doc.data();
             commit("SET_CATEGORIES", data);
+          });
+        firebase
+          .firestore()
+          .collection("comptes")
+          .doc(auth.uid)
+          .get()
+          .then((doc) => {
+            const data = doc.data();
+            commit("SET_COMPTES", data);
           });
       } else {
         commit("SET_USER", null);
@@ -137,6 +156,9 @@ export default new Vuex.Store({
     deleteOneCategorie({ commit }, id){
       const index = this.getters.categories.findIndex((categorie) => categorie.id === id)
       commit("DELETE_CATEGORIE", index);
+    },
+    addNewCompte({ commit }, data){
+      commit("ADD_NEW_COMPTE", data)
     }
   },
   modules: {
