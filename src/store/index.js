@@ -55,6 +55,13 @@ export default new Vuex.Store({
     },
     SET_CATEGORIES(state, data){
       state.categories = data.categories
+    },
+    UPDATE_CATEGORIE(state, data){
+      state.categories[data.catID] = {
+        label: data.label,
+        revenu: data.revenu,
+        icon: data.icon
+      }
     }
   },
   actions: {
@@ -119,6 +126,9 @@ export default new Vuex.Store({
     },
     updateCategories({ commit }, data){
       commit("SET_CATEGORIES", data);
+    },
+    updateOneCategorie({ commit }, data){
+      commit("UPDATE_CATEGORIE", data);
     }
   },
   modules: {
