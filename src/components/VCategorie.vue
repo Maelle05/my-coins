@@ -2,13 +2,13 @@
   <div class="VCategorie">
     <img :src="icons[getIconId(icon)]" alt="" srcset="" >
     <p>{{label}}</p>
-    <div class="cta" ref="cta">
+    <div class="cta" ref="cta" v-on:click='handleClickCta'>
       <span class="dot"></span>
       <span class="dot"></span>
       <span class="dot"></span>
     </div>
     <div class="menuCat" ref="menuCat">
-      <div class="bg" ref="bg"></div>
+      <div class="bg" ref="bg" v-on:click='handleClickCta' ></div>
       <div class="links">
         <router-link :to="'/categories/update/'+indexCat">Modifier</router-link>
         <span ref="suprBt">Supprimer</span>
@@ -32,17 +32,14 @@ export default {
     }
   },
   mounted(){
-    this.$refs.cta.addEventListener('click', ()=>{
-      this.$refs.menuCat.classList.toggle('active')
-    })
-    this.$refs.bg.addEventListener('click', ()=>{
-      this.$refs.menuCat.classList.toggle('active')
-    })
     this.$refs.suprBt.addEventListener('click', ()=>{
       alert('Cette action n\'est pas encore disponible')
     })
   },
   methods: {
+    handleClickCta(){
+      this.$refs.menuCat.classList.toggle('active')
+    },
     getIconId(key){
       return key.match(/\d+/g)[0]
     }
