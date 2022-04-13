@@ -87,6 +87,10 @@ export default {
   margin-top: 40px ;
 }
 
+.Comptes img{
+  width: 100%;
+}
+
 h1 {
   font-family: 'Roboto';
   font-weight: 700;
