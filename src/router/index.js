@@ -97,6 +97,14 @@ const routes = [
       authRequired: true,
     },
   },
+  {
+    path: '/comptes/update/:id',
+    name: 'Update Comptes',
+    component: () => import('../views/update/UpdateCompte.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
 ]
 
 const router = new VueRouter({
