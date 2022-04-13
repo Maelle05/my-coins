@@ -47,7 +47,7 @@ export default {
       }else if(solde == ''){
         setAlert('Un compte à besoin d\'un solde', true , false)
       }else{
-        this.$store.dispatch("addNewCompte", { id: Date.now() , label: label, solde: solde, bankSolde: solde });
+        this.$store.dispatch("addNewCompte", { id: Date.now() , label: label, solde: solde, bankSolde: solde, isLinkTrans: false });
         firebase
           .firestore()
           .collection("comptes")
