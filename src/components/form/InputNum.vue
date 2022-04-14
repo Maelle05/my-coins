@@ -1,8 +1,8 @@
 <template>
   <div class="InputNum">
-    <label ref="label" :for="name" class="">{{label}}</label>
-    <input ref="input" type="number" :id="name" :value="value ? value : ''"/>
-    <span>{{user.data.currency}}</span>
+    <label ref="label" :for="name" class="" :class="{ disabled: disabled, 'out': value }">{{label}}</label>
+    <input ref="input" type="number" :id="name" :value="value ? value : ''" :disabled="disabled" :class="disabled ? 'disabled' : '' " />
+    <span :class="disabled ? 'disabled' : '' " >{{user.data.currency}}</span>
   </div>
 </template>
 
@@ -14,7 +14,8 @@ export default {
   props: {
     label: String,
     name: String,
-    value: String
+    value: String,
+    disabled: Boolean
   },
   computed: {
     ...mapGetters({
@@ -64,6 +65,11 @@ label.out {
   transform: translateY(-10px);
 }
 
+label.disabled {
+  font-size: 12px;
+  transform: translateY(-10px);
+}
+
 input {
   all: unset;
   font-family: 'Roboto';
@@ -75,6 +81,11 @@ input {
   width: 60%;
 }
 
+input.disabled {
+  border-bottom: 4px solid var(--color-gray);
+  color: var(--color-gray);
+}
+
 span{
   font-family: 'Roboto';
   font-weight: 700;
@@ -82,5 +93,9 @@ span{
   display: inline-block;
   margin: 0 0 0 8px;
   transform: translateY(5px);
+}
+
+span.disabled{
+  color: var(--color-gray);
 }
 </style>

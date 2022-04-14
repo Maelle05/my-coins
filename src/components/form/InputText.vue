@@ -1,6 +1,6 @@
 <template>
   <div class="InputText">
-    <label ref="label" :for="name" class="">{{label}}</label>
+    <label ref="label" :for="name" :class="value ? 'out' : ''">{{label}}</label>
     <input ref="input" type="text" :id="name" :value="value ? value : ''"/>
   </div>
 </template>

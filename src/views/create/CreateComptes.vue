@@ -90,54 +90,6 @@ form{
   margin-top: 30px;
 }
 
-.inputToggle{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-top: 30px;
-  font-family: 'Inter';
-  font-weight: 500;
-  color: var(--color-black) ;
-  
-}
-
-.inputToggle span {
-  display: block;
-  padding: 3px 8px;
-}
-
-.inputToggle span.active {
-  color: var(--color-white);
-  background-color: var(--color-orange);
-  border-radius: 8px;
-}
-
-form p{
-  font-family: 'Inter';
-  font-weight: 300;
-  font-size: 16px;
-  margin-top: 32px;
-}
-
-.iconsContainer{
-  margin-top: 12px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.iconsContainer img{
-  width: 39px;
-  height: 39px;
-  margin: 10px;
-}
-
-.iconsContainer img.active{
-  border: solid 3px var(--color-black);
-  border-radius: 999px;
-  box-sizing: border-box;
-}
-
 .BtContainer{
   margin-top: 32px;
   display: flex;

@@ -10,7 +10,7 @@ export default {
   name: "InputMail",
   props: {
     label: String,
-    value: String
+    value: String,
   },
   mounted(){
     if (this.value) {
