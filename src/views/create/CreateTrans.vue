@@ -4,6 +4,7 @@
     <p>Spend : {{$route.params.spend}}</p>
     <form @submit.prevent="createTrans" ref="createTransForm">
       <input-num label="Valeur" />
+      <v-input-comptes />
       <input-date label="Date" />
       <div class="BtContainer">
         <Button label="Annuler" url="/transactions" />
@@ -18,6 +19,9 @@ import InputNum from '../../components/form/InputNum.vue'
 import InputDate from '../../components/form/InputDate.vue'
 import Button from '../../components/ui/Button.vue'
 import Submit from '../../components/form/Submit.vue'
+import VInputComptes from '../../components/VInputComptes.vue'
+
+
 import { setAlert } from '../../utils'
 
 export default {
@@ -25,6 +29,7 @@ export default {
   components: {
     InputNum,
     InputDate,
+    VInputComptes,
     Button,
     Submit
   },
@@ -36,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .CreateTrans{
   width: 80vw;
   margin: auto;
