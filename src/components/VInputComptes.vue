@@ -90,8 +90,8 @@ export default {
 
 <style scoped>
 .InputComptes{
-  width: 100%;
-  padding: 20px 0 9px 0;
+  width: 40vw;
+  padding: 10px 0 9px 0;
 }
 
 label{
@@ -124,7 +124,7 @@ label{
 .select-selected:after {
   position: absolute;
   content: "";
-  top: 14px;
+  top: 11px;
   right: 10px;
   width: 0;
   height: 0;
@@ -135,15 +135,17 @@ label{
 /* Point the arrow upwards when the select box is open (active): */
 .select-selected.select-arrow-active:after {
   border-color: transparent transparent #fff transparent;
-  top: 7px;
+  top: 5px;
 }
 
 /* style the items (options), including the selected item: */
 .select-items div,.select-selected {
   color: #ffffff;
-  padding: 8px 16px;
+  padding: 6px 13px;
   border: 1px solid transparent;
   cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* Style items (options): */

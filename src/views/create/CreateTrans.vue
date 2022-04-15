@@ -4,8 +4,11 @@
     <p>Spend : {{$route.params.spend}}</p>
     <form @submit.prevent="createTrans" ref="createTransForm">
       <input-num label="Valeur" />
-      <v-input-comptes />
-      <input-date label="Date" />
+      <div class="flex">
+        <v-input-comptes />
+        <input-date label="Date" />
+      </div>
+      
       <div class="BtContainer">
         <Button label="Annuler" url="/transactions" />
         <Submit label="Sauvegarder" small/>
@@ -57,6 +60,17 @@ h1 {
 
 form{
   margin-top: 50px;
+}
+
+.flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.InputDate{
+  margin-right: 12px;
 }
 
 .BtContainer{
