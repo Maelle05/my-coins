@@ -35,7 +35,6 @@ export default {
       }else{
         this.$refs.label.classList.remove('out')
       }
-      
     });
   }
 };

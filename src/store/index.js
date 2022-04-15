@@ -25,7 +25,8 @@ export default new Vuex.Store({
       loginOrRegister: false,
     },
     categories: [],
-    comptes: []
+    comptes: [],
+    transactions: []
   },
   getters: {
     user(state) {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     },
     comptes(state){
       return state.comptes
+    },
+    transactions(state){
+      return state.transactions
     }
   },
   mutations: {
@@ -86,6 +90,9 @@ export default new Vuex.Store({
         solde: data.solde,
       }
     },
+    SET_TRANSACTIONS(state, data){
+      state.transactions.push(data)
+    }
   },
   actions: {
     fetchUser({ commit }, user) {
@@ -127,9 +134,58 @@ export default new Vuex.Store({
             const data = doc.data();
             commit("SET_COMPTES", data);
           });
+        const currentDate = new Date();
+        const lastMonth = currentDate.getMonth() === 0 ? 12 : currentDate.getMonth();
+        const currentMonth = currentDate.getMonth() + 1;
+        const currentYear = currentDate.getFullYear();
+        const lastMonthY = currentDate.getMonth() === 0 ? currentYear-1 : currentYear
+        const lastResultDate = `${('0' + lastMonth).slice(-2)}-${lastMonthY}`
+        const currentResultDate = `${('0' + currentMonth).slice(-2)}-${currentYear}`
+
+        firebase
+          .firestore()
+          .collection("transactions")
+          .doc(auth.uid)
+          .collection(lastResultDate)
+          .get()
+          .then((transactions) => {
+            const trans = []
+            for (let i = 0; i < transactions.docs.length; i++) {
+              trans.push({
+                id: transactions.docs[i].id,
+                data: transactions.docs[i].data()
+              })
+            }
+            const result = {
+              month: lastResultDate,
+              trans: trans
+            }
+            commit("SET_TRANSACTIONS", result);
+          });
+        firebase
+          .firestore()
+          .collection("transactions")
+          .doc(auth.uid)
+          .collection(currentResultDate)
+          .get()
+          .then((transactions) => {
+            const trans = []
+            for (let i = 0; i < transactions.docs.length; i++) {
+              trans.push({
+                id: transactions.docs[i].id,
+                data: transactions.docs[i].data()
+              })
+            }
+            const result = {
+              month: currentResultDate,
+              trans: trans
+            }
+            commit("SET_TRANSACTIONS", result);
+          });
       } else {
         commit("SET_USER", null);
         commit("SET_CATEGORIES", []);
+        commit("SET_COMPTES", []);
       }
     },
     updateUser({ commit }, userInfo) {
