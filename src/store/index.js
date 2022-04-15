@@ -124,7 +124,7 @@ export default new Vuex.Store({
           .then((doc) => {
             const data = doc.data();
             commit("SET_CATEGORIES", data);
-          });
+          })
         firebase
           .firestore()
           .collection("comptes")
@@ -133,7 +133,7 @@ export default new Vuex.Store({
           .then((doc) => {
             const data = doc.data();
             commit("SET_COMPTES", data);
-          });
+          })
         const currentDate = new Date();
         const lastMonth = currentDate.getMonth() === 0 ? 12 : currentDate.getMonth();
         const currentMonth = currentDate.getMonth() + 1;

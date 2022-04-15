@@ -1,12 +1,17 @@
 <template>
   <div class="InputComptes custom-select" ref="InputComptes">
     <label for="comptes-select">Comptes</label>
-    <select name="comptesSelect" id="comptes-select">
-      <option v-for="compte in comptes" :key="compte.id" :value="compte.id">{{compte.label}}</option>
-    </select>
-    <div ref="selectSelected" class="select-selected">{{comptes[0].label}}</div>
-    <div ref="canSelectDiv" class="select-items select-hide">
-      <div v-for="compte in comptes" :key="compte.id" :value="compte.id">{{compte.label}}</div>
+    <div v-if="comptes.length > 0">
+      <select name="comptesSelect" id="comptes-select">
+        <option v-for="compte in comptes" :key="compte.id" :value="compte.id">{{compte.label}}</option>
+      </select>
+      <div ref="selectSelected" class="select-selected">{{comptes[0].label}}</div>
+      <div ref="canSelectDiv" class="select-items select-hide">
+        <div v-for="compte in comptes" :key="compte.id" :value="compte.id">{{compte.label}}</div>
+      </div>
+    </div>
+    <div v-else >
+      <router-link to="/comptes/create">Créé des comptes</router-link>
     </div>
   </div>
 </template>
@@ -22,67 +27,75 @@ export default {
     }),
   },
   mounted(){
-    const selectedDiv = this.$refs.selectSelected
-    const canSelectDiv = this.$refs.canSelectDiv
+    if (this.comptes.length > 0) {
+      this.init()
+    }
 
-    for (let i = 0; i < canSelectDiv.children.length; i++) {
-      canSelectDiv.children[i].addEventListener("click",
-        function() {
-          /* When an item is clicked, update the original select box,
-          and the selected item: */
-          var y, i, k, s, h, sl, yl;
-          s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-          sl = s.length;
-          h = this.parentNode.previousSibling;
-          for (i = 0; i < sl; i++) {
-            if (s.options[i].innerHTML == this.innerHTML) {
-              s.selectedIndex = i;
-              h.innerHTML = this.innerHTML;
-              y = this.parentNode.getElementsByClassName("same-as-selected");
-              yl = y.length;
-              for (k = 0; k < yl; k++) {
-                y[k].removeAttribute("class");
+  },
+  methods: {
+    init(){
+      const selectedDiv = this.$refs.selectSelected
+      const canSelectDiv = this.$refs.canSelectDiv
+
+      for (let i = 0; i < canSelectDiv.children.length; i++) {
+        canSelectDiv.children[i].addEventListener("click",
+          function() {
+            /* When an item is clicked, update the original select box,
+            and the selected item: */
+            var y, i, k, s, h, sl, yl;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            sl = s.length;
+            h = this.parentNode.previousSibling;
+            for (i = 0; i < sl; i++) {
+              if (s.options[i].innerHTML == this.innerHTML) {
+                s.selectedIndex = i;
+                h.innerHTML = this.innerHTML;
+                y = this.parentNode.getElementsByClassName("same-as-selected");
+                yl = y.length;
+                for (k = 0; k < yl; k++) {
+                  y[k].removeAttribute("class");
+                }
+                this.setAttribute("class", "same-as-selected");
+                break;
               }
-              this.setAttribute("class", "same-as-selected");
-              break;
             }
+            h.click();
           }
-          h.click();
+        )
+      }
+
+      selectedDiv.addEventListener("click", function(e) {
+        e.stopPropagation();
+        this.nextSibling.classList.toggle("select-hide");
+        this.classList.toggle("select-arrow-active");
+      });
+
+      function closeAllSelect(elmnt) {
+        /* A function that will close all select boxes in the document,
+        except the current select box: */
+        var x, y, i, xl, yl, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        xl = x.length;
+        yl = y.length;
+        for (i = 0; i < yl; i++) {
+          if (elmnt == y[i]) {
+            arrNo.push(i)
+          } else {
+            y[i].classList.remove("select-arrow-active");
+          }
         }
-      )
-    }
-
-    selectedDiv.addEventListener("click", function(e) {
-      e.stopPropagation();
-      this.nextSibling.classList.toggle("select-hide");
-      this.classList.toggle("select-arrow-active");
-    });
-
-    function closeAllSelect(elmnt) {
-      /* A function that will close all select boxes in the document,
-      except the current select box: */
-      var x, y, i, xl, yl, arrNo = [];
-      x = document.getElementsByClassName("select-items");
-      y = document.getElementsByClassName("select-selected");
-      xl = x.length;
-      yl = y.length;
-      for (i = 0; i < yl; i++) {
-        if (elmnt == y[i]) {
-          arrNo.push(i)
-        } else {
-          y[i].classList.remove("select-arrow-active");
+        for (i = 0; i < xl; i++) {
+          if (arrNo.indexOf(i)) {
+            x[i].classList.add("select-hide");
+          }
         }
       }
-      for (i = 0; i < xl; i++) {
-        if (arrNo.indexOf(i)) {
-          x[i].classList.add("select-hide");
-        }
-      }
-    }
 
-    /* If the user clicks anywhere outside the select box,
-    then close all select boxes: */
-    document.addEventListener("click", closeAllSelect);
+      /* If the user clicks anywhere outside the select box,
+      then close all select boxes: */
+      document.addEventListener("click", closeAllSelect);
+    }
   }
 
 }
@@ -167,5 +180,9 @@ label{
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 12px;
+}
+
+a{
+  color: var(--color-black)
 }
 </style>
