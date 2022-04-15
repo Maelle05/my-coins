@@ -7,5 +7,5 @@ export function setAlert(text, red, green) {
   const textElement = alertElement.querySelector('p')
   textElement.innerHTML = text
 
-  setTimeout(() => { alertElement.classList.remove('active') }, 4000)
+  setTimeout(() => { alertElement.classList.remove('active') }, 2000)
 }
