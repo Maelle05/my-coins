@@ -9,6 +9,7 @@
           <p>Menu</p>
           <router-link class="first" to="/dashboard" >Vue d’ensemble</router-link>
           <router-link to="/comptes" > Mes Comptes </router-link>
+          <router-link to="/transactions" > Transactions </router-link>
           <router-link to="/categories" > Mes Catégories </router-link>
           <router-link to="/profil"> Profil </router-link>
         </div>

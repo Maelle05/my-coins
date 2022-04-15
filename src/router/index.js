@@ -105,6 +105,14 @@ const routes = [
       authRequired: true,
     },
   },
+  {
+    path: '/transactions',
+    name: 'Transactions',
+    component: () => import('../views/Transactions.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
 ]
 
 const router = new VueRouter({
