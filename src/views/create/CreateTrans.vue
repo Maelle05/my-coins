@@ -18,6 +18,7 @@ import InputNum from '../../components/form/InputNum.vue'
 import InputDate from '../../components/form/InputDate.vue'
 import Button from '../../components/ui/Button.vue'
 import Submit from '../../components/form/Submit.vue'
+import { setAlert } from '../../utils'
 
 export default {
   name: 'CreateTrans',
@@ -29,7 +30,7 @@ export default {
   },
   methods: {
     createTrans(){
-      console.log('coucou')
+      setAlert("Cette feature n'est pas encore disponible", false, false);
     }
   }
 }
