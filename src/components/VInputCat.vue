@@ -1,16 +1,16 @@
 <template>
   <div class="InputCat custom-select" ref="InputCat">
     <label for="cat-select">Categories</label>
-    <div v-if="categories.length > 0">
+    <div v-if="thisCat.length > 0">
       <select name="catSelect" id="cat-select">
-        <option v-for="categorie in categories" :key="categorie.id" :value="categorie.id">{{categorie.label}}</option>
+        <option v-for="categorie in thisCat" :key="categorie.id" :value="categorie.id">{{categorie.label}}</option>
       </select>
       <div ref="selectSelected" class="select-selected">
-        <img :src="icons[getIconId(categories[0].icon)]" alt="" srcset="">
-        <span>{{categories[0].label}}</span>
+        <img :src="icons[getIconId(thisCat[0].icon)]" alt="" srcset="">
+        <span>{{thisCat[0].label}}</span>
       </div>
       <div ref="canSelectDiv" class="select-items select-hide">
-        <div v-for="categorie in categories" :key="categorie.id" :value="categorie.id">
+        <div v-for="categorie in thisCat" :key="categorie.id" :value="categorie.id">
           <img :src="icons[getIconId(categorie.icon)]" alt="" srcset="">
           <span>{{categorie.label}}</span>
         </div>
@@ -33,15 +33,37 @@ export default {
       categories: "categories",
     }),
   },
-  mounted(){
-    if (this.categories.length > 0) {
-      this.init()
-    }
+  props: {
+    spend: String
   },
   data(){
     return {
+      thisCat: [],
       icons: require.context('../assets/categories/', false, /\.svg$/).keys().map(require.context('../assets/categories/', false, /\.svg$/)),
     }
+  },
+  mounted(){
+    if (this.spend === "1") {
+      for (let i = 0; i < this.categories.length; i++) {
+        if (this.categories[i].revenu === false) {
+          this.thisCat.push(this.categories[i])
+        }
+      }
+    } else {
+      for (let i = 0; i < this.categories.length; i++) {
+        if (this.categories[i].revenu === true) {
+          this.thisCat.push(this.categories[i])
+        }
+      }
+    }
+    this.$nextTick(
+      ()=>{
+        if (this.thisCat.length > 0) {
+          this.init()
+        }
+      }
+    )
+    
   },
   methods: {
     getIconId(key){

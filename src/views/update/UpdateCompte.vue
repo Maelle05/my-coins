@@ -6,7 +6,7 @@
       <br>
       <div v-if="this.compte.isLinkTrans === true" >
         <input-num  label="Solde" name="solde" :value="this.compte.solde" disabled/>
-        <p>Des transactions sont liées à ce compte, vous ne pouvez plus modifier son solde</p>
+        <p>Des transactions on été liées à ce compte, vous ne pouvez plus modifier son solde</p>
       </div>
       <input-num v-else label="Solde" name="solde" :value="this.compte.solde" />
       <div class="BtContainer">

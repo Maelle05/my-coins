@@ -8,7 +8,7 @@
         <v-input-comptes />
         <input-date label="Date" />
       </div>
-      <v-input-cat />
+      <v-input-cat :spend="$route.params.spend"/>
       <input-aera-text label="Description" name="description"/>
       <div class="BtContainer">
         <Button label="Annuler" url="/transactions" />
