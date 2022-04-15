@@ -39,6 +39,7 @@ export default {
   computed: {
     ...mapGetters({
       comptes: "comptes",
+      user: "user"
     }),
   },
   data(){

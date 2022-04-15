@@ -113,6 +113,14 @@ const routes = [
       authRequired: true,
     },
   },
+  {
+    path: '/transactions/create/:spend',
+    name: 'Create Transaction',
+    component: () => import('../views/create/CreateTrans.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
 ]
 
 const router = new VueRouter({
