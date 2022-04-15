@@ -13,21 +13,13 @@ export default {
     value: String
   },
   mounted(){
-    if (!this.value) {
-      this.getCurentDate()
-    }
+    this.$refs.input.max = new Date().toLocaleDateString('en-ca')
   },
   methods:{
     getCurentDate(){
       const today = new Date();
       const date = today.getFullYear() + '-' + this.padTo2Digits(today.getMonth()+1) + '-' + this.padTo2Digits(today.getDate());
-      if (!this.value) {
-        if (this.$refs.input) {
-          this.$refs.input.value = date
-        }else{
-          return date
-        }
-      }
+      return date
     },
     padTo2Digits(num) {
       return num.toString().padStart(2, '0');
@@ -61,7 +53,6 @@ label.out {
 
 input {
   /* all: unset; */
-  pointer-events: none;
   border: none;
   background-color: var(--color-white);
   font-family: 'Roboto';
