@@ -8,7 +8,7 @@
         <v-input-comptes />
         <input-date label="Date" />
       </div>
-      
+      <input-aera-text label="Description" name="description"/>
       <div class="BtContainer">
         <Button label="Annuler" url="/transactions" />
         <Submit label="Sauvegarder" small/>
@@ -22,6 +22,7 @@ import InputNum from '../../components/form/InputNum.vue'
 import InputDate from '../../components/form/InputDate.vue'
 import Button from '../../components/ui/Button.vue'
 import Submit from '../../components/form/Submit.vue'
+import InputAeraText from '../../components/form/InputAeraText.vue'
 import VInputComptes from '../../components/VInputComptes.vue'
 
 
@@ -33,6 +34,7 @@ export default {
     InputNum,
     InputDate,
     VInputComptes,
+    InputAeraText,
     Button,
     Submit
   },
@@ -74,7 +76,7 @@ form{
 }
 
 .BtContainer{
-  margin-top: 32px;
+  margin-top: 22px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
