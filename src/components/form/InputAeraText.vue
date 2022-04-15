@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .InputAeraText{
   margin-top: 10px;
 }
