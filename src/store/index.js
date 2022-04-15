@@ -76,7 +76,16 @@ export default new Vuex.Store({
     },
     ADD_NEW_COMPTE(state, data){
       state.comptes.push(data)
-    }
+    },
+    UPDATE_COMPTE(state, data){
+      state.comptes[data.compteIndex] = {
+        label: data.label,
+        id: data.id,
+        bankSolde: data.bankSolde,
+        isLinkTrans: data.isLinkTrans,
+        solde: data.solde,
+      }
+    },
   },
   actions: {
     fetchUser({ commit }, user) {
@@ -159,6 +168,9 @@ export default new Vuex.Store({
     },
     addNewCompte({ commit }, data){
       commit("ADD_NEW_COMPTE", data)
+    },
+    updateOneCompte({ commit }, data){
+      commit("UPDATE_COMPTE", data)
     }
   },
   modules: {

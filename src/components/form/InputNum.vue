@@ -1,7 +1,7 @@
 <template>
   <div class="InputNum">
     <label ref="label" :for="name" class="" :class="{ disabled: disabled, 'out': value }">{{label}}</label>
-    <input ref="input" type="number" :id="name" :value="value ? value : ''" :disabled="disabled" :class="disabled ? 'disabled' : '' " />
+    <input ref="input" step=".01" type="number" :id="name" :value="value ? value : ''" :disabled="disabled" :class="disabled ? 'disabled' : '' " />
     <span :class="disabled ? 'disabled' : '' " >{{user.data.currency}}</span>
   </div>
 </template>

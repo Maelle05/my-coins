@@ -23,6 +23,10 @@ import InputNum from "../../components/form/InputNum.vue"
 import Submit from "../../components/form/Submit.vue"
 import Button from "../../components/ui/Button.vue"
 import { mapGetters } from "vuex";
+import { setAlert } from "../../utils";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 export default {
   name: 'UpdateCompte',
@@ -34,11 +38,35 @@ export default {
   },
   methods: {
     updateCompte(){
-      console.log('coucou')
+      const label = this.$refs.updateCompteForm['label'].value
+      const amount = this.$refs.updateCompteForm['solde'].value
+      this.$store.dispatch("updateOneCompte", { 
+        bankSolde: this.compte.isLinkTrans ? this.compte.bankSolde : amount,
+        id: this.compteID, 
+        isLinkTrans: this.compte.isLinkTrans,
+        label: label,
+        solde: amount,
+        compteIndex: this.compteIndex
+      });
+      firebase
+        .firestore()
+        .collection("comptes")
+        .doc(this.user.data.id)
+        .set({
+          comptes: this.comptes
+        })
+        .then(() => {
+          setAlert("Le compte a bien été modifier", false, true);
+          this.$router.push("/comptes");
+        })
+        .catch((error) => {
+          setAlert(error.message, true, false);
+        });
     }
   },
   computed: {
     ...mapGetters({
+      user: "user",
       comptes: "comptes",
     }),
   },
@@ -51,8 +79,8 @@ export default {
     }
   },
   mounted(){
-    const index = this.comptes.findIndex((compte) => compte.id == this.compteID)
-    this.compte = this.comptes[index]
+    this.compteIndex = this.comptes.findIndex((compte) => compte.id == this.compteID)
+    this.compte = this.comptes[this.compteIndex]
   }
 
 }
