@@ -8,6 +8,7 @@
         <v-input-comptes />
         <input-date label="Date" />
       </div>
+      <v-input-cat />
       <input-aera-text label="Description" name="description"/>
       <div class="BtContainer">
         <Button label="Annuler" url="/transactions" />
@@ -24,6 +25,7 @@ import Button from '../../components/ui/Button.vue'
 import Submit from '../../components/form/Submit.vue'
 import InputAeraText from '../../components/form/InputAeraText.vue'
 import VInputComptes from '../../components/VInputComptes.vue'
+import VInputCat from '../../components/VInputCat.vue'
 
 
 import { setAlert } from '../../utils'
@@ -34,6 +36,7 @@ export default {
     InputNum,
     InputDate,
     VInputComptes,
+    VInputCat,
     InputAeraText,
     Button,
     Submit

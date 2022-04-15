@@ -36,7 +36,6 @@ export default {
   },
   data(){
     return {
-      total_icons_cat: require.context('../assets/categories/', false, /\.(svg)$/).keys().length,
       icons: require.context('../assets/categories/', false, /\.svg$/).keys().map(require.context('../assets/categories/', false, /\.svg$/)),
     }
   },
